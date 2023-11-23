@@ -1,0 +1,10 @@
+# ninja log v5
+34	10846	7224684511176450	examples-build/api_example-build/api-build/CMakeFiles/apicalllib.dir/client.cpp.obj	ca14ae7b0d240ab6
+34	9350	7224692119201069	examples-build/api_example-build/api-build/CMakeFiles/apicalllib.dir/session.cpp.obj	9c1e67f23870871a
+26	4212	7224683732508279	examples-build/api_example-build/CMakeFiles/api_example.dir/main.cpp.obj	e04f4130a2ea1e6e
+15	81	7224663236788210	examples-build/api_example-build/api-build/CMakeFiles/apicalllib.dir/api.cpp.obj	5a7157599de8f85d
+9351	12258	7224692148423145	examples-build/api_example-build/api-build/libapicalllib.a	80d29f1bba5e335a
+12258	14125	7224692166955095	examples-build/api_example-build/api_example.exe	9a47804238bebb9d
+35	5820	7224692430320720	examples-build/api_example-build/api-build/CMakeFiles/apicalllib.dir/client.cpp.obj	ca14ae7b0d240ab6
+5820	8683	7224692459012764	examples-build/api_example-build/api-build/libapicalllib.a	80d29f1bba5e335a
+8683	10567	7224692477725648	examples-build/api_example-build/api_example.exe	9a47804238bebb9d

@@ -3,22 +3,23 @@
 Session::Session(net::any_io_executor ex,
                  ssl::context& ctx) : resolver_(ex), stream_(ex, ctx)
 {
+    host = "www.alphavantage.co";
+    port = "443";
+
     req_.version(11);
-    req_.method(http:verb::get);
+    req_.method(http::verb::get);
     // req_.target("TARGET");
     req_.set(http::field::host, host);
     req_.set(http::field::user_agent, BOOST_BEAST_VERSION_STRING);
 }
 
 
-void Session::Run(std::string host,
-                  std::string port)
+void Session::Run()
 {
     // set SNI hostname
-    if (! SSL_set_tlsext_hostname(stram.stream_.native_handler(), host))
+    if (! SSL_set_tlsext_host_name(stream_.native_handle(), &host))
     {
-        beast::error_code ec {std::static_cast<int>(::ERR_get_error()),
-                                                    net::error::get_ssl::category};
+        beast::error_code ec{static_cast<int>(::ERR_get_error()), net::error::get_ssl_category()};
 
         std::cerr << ec.message() << '\n';        
         return;
@@ -38,11 +39,11 @@ void Session::OnResolve(beast::error_code ec,
 {
     if (ec)
     {
-        std::cerr << ec.message() << '\n';
+        std::cerr << "OnResolve: " << ec.message() << '\n';
         return;
     }
 
-    beast::set_lowest_layer(stream_).expires_after(std::chrono::seconds(30));
+    beast::get_lowest_layer(stream_).expires_after(std::chrono::seconds(30));
 
     beast::get_lowest_layer(stream_).async_connect(results,
                                                     beast::bind_front_handler(
@@ -55,7 +56,7 @@ void Session::OnConnect(beast::error_code ec, tcp::resolver::results_type::endpo
 {
     if (ec)
     {
-        std::cerr << ec.message() << '\n';
+        std::cerr << "OnConnect: " << ec.message() << '\n';
         return;
     }
 
@@ -70,7 +71,7 @@ void Session::OnHandshake(beast::error_code ec)
 {
     if (ec)
     {
-        std::cerr << ec.message() << '\n';
+        std::cerr << "OnHandshake: " << ec.message() << '\n';
         return;
     }
 

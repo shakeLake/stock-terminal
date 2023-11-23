@@ -12,17 +12,25 @@ set(Boost_USE_STATIC_RUNTIME OFF)
 
 find_package(Boost REQUIRED)
 
+set(OPENSSL_USE_STATIC_LIBS TRUE)
+find_package(OpenSSL REQUIRED)
+
 set(API_SOURCE
     api.cpp
     "include/api.hpp"
     client.cpp
-    "include/client.cpp"
+    "include/client.hpp"
     session.cpp
     "include/session.hpp"
+    "include/root_certificates.hpp"
 )
 
 add_library(apicalllib STATIC ${API_SOURCE})
 
 target_link_libraries(apicalllib PUBLIC Threads::Threads)
+
+target_link_libraries(apicalllib PUBLIC OpenSSL::SSL)
+target_link_libraries(apicalllib PUBLIC OpenSSL::Crypto)
+
 target_link_libraries(apicalllib PUBLIC ${Boost_LIBRARIES})
-target_include_directories(apicalllib PRIVATE ${Boost_INCLUDE_DIRS})
+target_include_directories(apicalllib PUBLIC ${Boost_INCLUDE_DIRS})

@@ -14,7 +14,7 @@ private:
 
 public:
     Client() = delete;
-    Client(std::string& /*api key*/);
+    Client(std::string /*api key*/);
 
     ~Client();
 

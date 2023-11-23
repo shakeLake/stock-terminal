@@ -8,9 +8,18 @@
 #include <boost/asio/strand.hpp>
 #include <iostream>
 
+namespace beast = boost::beast;         // from <boost/beast.hpp>
+namespace http = beast::http;           // from <boost/beast/http.hpp>
+namespace net = boost::asio;            // from <boost/asio.hpp>
+namespace ssl = boost::asio::ssl;       // from <boost/asio/ssl.hpp>
+using tcp = boost::asio::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
+
 class Session : public std::enable_shared_from_this<Session>
 {
 private:
+    std::string host;
+    std::string port;
+
     tcp::resolver resolver_;
     beast::ssl_stream<beast::tcp_stream> stream_;
     beast::flat_buffer buffer_;
@@ -18,10 +27,6 @@ private:
     http::response<http::string_body> res_;
 
 private:
-    void Run(std::string /*host*/,
-             std::string /*port*/,
-             int /*version*/)
-
     void OnResolve(beast::error_code,
                     tcp::resolver::results_type /*results*/);
 
@@ -34,15 +39,17 @@ private:
                  std::size_t /*bytes transferred*/);
 
     void OnRead(beast::error_code,
-                std::size_t /*bytes transferred*/)
+                std::size_t /*bytes transferred*/);
 
-    void OnShutdown(beast::error_code)
+    void OnShutdown(beast::error_code);
 
 public:
     Session(net::any_io_executor /*io*/,
             ssl::context& /*ssl context*/);
     
-    ~Session();
+    ~Session() = default;
+
+    void Run();
 
 };
 
