@@ -14,7 +14,11 @@ find_package(Boost REQUIRED)
 
 set(API_SOURCE
     api.cpp
-    api.hpp
+    "include/api.hpp"
+    client.cpp
+    "include/client.cpp"
+    session.cpp
+    "include/session.hpp"
 )
 
 add_library(apicalllib STATIC ${API_SOURCE})

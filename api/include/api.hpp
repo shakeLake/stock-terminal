@@ -4,7 +4,6 @@
 class APICall
 {
 private:
-    std::string server_ip;
     std::string api_key;
 
 public:
@@ -13,10 +12,10 @@ public:
     APICall(std::string& /*api key*/);
     ~APICall() = default;
 
-    void TIME_SERIES_INTRADAY(std::string& /*symbol*/, 
-                              std::string& /*interval*/);
+    std::string& TIME_SERIES_INTRADAY(std::string& /*symbol*/, 
+                                     std::string& /*interval*/);
 
-    void TIME_SERIES_DAILY(std::string& /*symbol*/);
+    std::string& TIME_SERIES_DAILY(std::string& /*symbol*/);
 
 };
 

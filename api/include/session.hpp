@@ -1,6 +1,13 @@
 #ifndef SESSION_HPP_
 #define SESSION_HPP_
 
+#include <boost/beast/core.hpp>
+#include <boost/beast/http.hpp>
+#include <boost/beast/ssl.hpp>
+#include <boost/beast/version.hpp>
+#include <boost/asio/strand.hpp>
+#include <iostream>
+
 class Session : public std::enable_shared_from_this<Session>
 {
 private:
@@ -11,9 +18,8 @@ private:
     http::response<http::string_body> res_;
 
 private:
-    void Run(std::string& /*host*/,
-             std::string& /*port*/,
-             std::string& /*target*/
+    void Run(std::string /*host*/,
+             std::string /*port*/,
              int /*version*/)
 
     void OnResolve(beast::error_code,
@@ -25,7 +31,7 @@ private:
     void OnHandshake(beast::error_code);
 
     void OnWrite(beast::error_code,
-                std::size_t /*bytes transferred*/);
+                 std::size_t /*bytes transferred*/);
 
     void OnRead(beast::error_code,
                 std::size_t /*bytes transferred*/)
@@ -35,6 +41,8 @@ private:
 public:
     Session(net::any_io_executor /*io*/,
             ssl::context& /*ssl context*/);
+    
+    ~Session();
 
 };
 
