@@ -1,21 +1,27 @@
 #ifndef API_HPP_
 #define API_HPP_
 
+#include <string>
+
 class APICall
 {
 private:
-    std::string api_key;
+    std::string apiKey;
 
 public:
-    APICall() = delete;
+    APICall(std::string /*api*/);
 
-    APICall(std::string& /*api key*/);
+    APICall() = delete;
     ~APICall() = default;
 
-    std::string& TIME_SERIES_INTRADAY(std::string& /*symbol*/, 
-                                     std::string& /*interval*/);
+    // Core Stock API
+    std::string TIME_SERIES_INTRADAY(std::string /*symbol*/, 
+                                      std::string /*interval*/);
 
-    std::string& TIME_SERIES_DAILY(std::string& /*symbol*/);
+    std::string TIME_SERIES_DAILY(std::string /*symbol*/);
+
+    // Alpha Intelligence
+    std::string NEWS_SENTIMENT(std::string /*ticker*/);
 
 };
 

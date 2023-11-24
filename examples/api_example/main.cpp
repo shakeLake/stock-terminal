@@ -2,7 +2,7 @@
 
 int main()
 {
-    Client cli("JSADHCT02WL4A3Y1");
+    Client cli;
 
     return 0;
 }

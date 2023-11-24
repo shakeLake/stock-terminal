@@ -12,10 +12,10 @@ private:
     net::io_context io_c;
     ssl::context ctx;
 
-public:
-    Client() = delete;
-    Client(std::string /*api key*/);
+    APICall* api;
 
+public:
+    Client();
     ~Client();
 
 };

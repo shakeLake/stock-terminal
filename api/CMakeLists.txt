@@ -2,6 +2,12 @@ cmake_minimum_required(VERSION 3.2...3.5)
 
 project(API)
 
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Og")
+
+if (CMAKE_BUILD_TYPE STREQUAL "")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O1")
+endif()
+
 find_package(Threads REQUIRED)
 
 set(Boost_USE_STATIC_LIBS ON)  # only find static libs

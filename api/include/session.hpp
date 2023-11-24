@@ -8,6 +8,8 @@
 #include <boost/asio/strand.hpp>
 #include <iostream>
 
+#include "api.hpp"
+
 namespace beast = boost::beast;         // from <boost/beast.hpp>
 namespace http = beast::http;           // from <boost/beast/http.hpp>
 namespace net = boost::asio;            // from <boost/asio.hpp>
@@ -19,6 +21,8 @@ class Session : public std::enable_shared_from_this<Session>
 private:
     std::string host;
     std::string port;
+
+    APICall* api_call;
 
     tcp::resolver resolver_;
     beast::ssl_stream<beast::tcp_stream> stream_;
@@ -45,7 +49,8 @@ private:
 
 public:
     Session(net::any_io_executor /*io*/,
-            ssl::context& /*ssl context*/);
+            ssl::context& /*ssl context*/,
+            APICall* /*api*/);
     
     ~Session() = default;
 
