@@ -4,12 +4,14 @@
 #include <QMainWindow>
 #include "toolbar.hpp"
 #include "stockslist.hpp"
+#include "review.hpp"
 
 class UserInterface : public QMainWindow
 {
 private:
     ToolBar GetToolBar;
     StockList GetStockList;
+    Review GetReviewMenu;
 
 public:
     UserInterface();

@@ -7,4 +7,5 @@ UserInterface::UserInterface()
 
     addToolBar(GetToolBar());
     addDockWidget(Qt::LeftDockWidgetArea, GetStockList());
+    addDockWidget(Qt::RightDockWidgetArea, GetReviewMenu());
 }
