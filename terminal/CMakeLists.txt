@@ -10,7 +10,12 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Gui)
 
 set(APP_SOURCE
-        app.cpp)
+        app.cpp
+        mainwindow.cpp
+        "include/mainwindow.hpp"
+        toolbar.cpp
+        "include/toolbar.hpp"
+)
 
 add_library(app-lib STATIC ${APP_SOURCE})
 
