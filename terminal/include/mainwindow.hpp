@@ -3,11 +3,13 @@
 
 #include <QMainWindow>
 #include "toolbar.hpp"
+#include "stockslist.hpp"
 
 class UserInterface : public QMainWindow
 {
 private:
     ToolBar GetToolBar;
+    StockList GetStockList;
 
 public:
     UserInterface();

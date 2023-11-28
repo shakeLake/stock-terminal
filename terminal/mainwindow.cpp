@@ -6,4 +6,5 @@ UserInterface::UserInterface()
     resize(900, 600);
 
     addToolBar(GetToolBar());
+    addDockWidget(Qt::LeftDockWidgetArea, GetStockList());
 }

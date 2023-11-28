@@ -15,6 +15,8 @@ set(APP_SOURCE
         "include/mainwindow.hpp"
         toolbar.cpp
         "include/toolbar.hpp"
+        stockslist.cpp
+        "include/stockslist.hpp"
 )
 
 add_library(app-lib STATIC ${APP_SOURCE})
