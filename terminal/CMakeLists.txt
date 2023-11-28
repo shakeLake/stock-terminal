@@ -19,6 +19,8 @@ set(APP_SOURCE
         "include/stockslist.hpp"
         review.cpp
         "include/review.hpp"
+        newsfeed.cpp
+        "include/newsfeed.hpp"
 )
 
 add_library(app-lib STATIC ${APP_SOURCE})

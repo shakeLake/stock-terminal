@@ -13,9 +13,6 @@ Review::Review()
     container->setStyleSheet("background-color: black");
 
     QVBoxLayout* layout = new QVBoxLayout(container);
-    QLabel* lbl = new QLabel("test");
-
-    layout->addWidget(lbl);
 }
 
 QDockWidget* Review::operator()()

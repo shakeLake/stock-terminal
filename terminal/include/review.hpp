@@ -4,7 +4,6 @@
 #include <QDockWidget>
 #include <QVBoxLayout>
 #include <QWidget>
-#include <QLabel>
 
 class Review : public QDockWidget
 {
