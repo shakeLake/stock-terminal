@@ -2,17 +2,17 @@
 
 NewsFeed::NewsFeed()
 {
-    setFeatures(QDockWidget::NoDockWidgetFeatures);
+    // setFeatures(QDockWidget::NoDockWidgetFeatures);
 
     // hides title bar
     setTitleBarWidget(new QWidget);
 
-    QWidget* container = new QWidget;
-    setWidget(container);
+    main_widget = new QWidget;
+    setWidget(main_widget);
 
-    container->setStyleSheet("background-color: green");
+    main_widget->setStyleSheet("background-color: green");
 
-    QVBoxLayout* layout = new QVBoxLayout(container);
+    main_layout = new QVBoxLayout(main_widget);
 }
 
 QDockWidget* NewsFeed::operator()()

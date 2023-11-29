@@ -2,7 +2,7 @@
 
 Review::Review()
 {
-    setFeatures(QDockWidget::NoDockWidgetFeatures);
+    // setFeatures(QDockWidget::NoDockWidgetFeatures);
 
     // hides title bar
     setTitleBarWidget(new QWidget);    

@@ -1,9 +1,9 @@
 #include "include/mainwindow.hpp"
 
-UserInterface::UserInterface()
+UserInterface::UserInterface(int height, int width)
 {
     setWindowTitle("Terminal");
-    resize(900, 600);
+    resize(width, height);
 
     addToolBar(GetToolBar());
     addDockWidget(Qt::LeftDockWidgetArea, GetNewsFeed());

@@ -17,7 +17,7 @@ private:
     NewsFeed GetNewsFeed;
 
 public:
-    UserInterface();
+    UserInterface(int, int);
     ~UserInterface() = default;
 
 };
