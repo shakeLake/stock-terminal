@@ -2,9 +2,5 @@
 
 JsonParser::JsonParser(std::string str)
 {
-    jsonparser.reset();
-    jsonparser.write(str);
-    jv = jsonparser.release();
-    
-    std::cout << jv << std::endl;
+    std::cout << str << std::endl;
 }
