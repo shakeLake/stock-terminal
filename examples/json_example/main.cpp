@@ -12,14 +12,28 @@ int main()
     ptree pt;
     json_parser::read_json("fl.json", pt);
 
+    int test = pt.get<int>("items");
+    std::cout << test << std::endl;
+
+    // authors
+    for (auto& item : pt.get_child("feed"))
+    {
+        for (auto& sitem : item.second.get_child("authors"))
+        {
+            std::string tst = sitem.second.get_value<std::string>();
+            std::cout << tst << std::endl;
+        }
+
+        // r.push_back(item.second.get<std::string>("title"));
+    }
+
+    // titles
     std::vector<std::string> r;
-    for (auto& item : pt.get_child("feed.authors"))
-        r.push_back(item.second.get_value<std::string>());
-
-    for (auto i : r)
-        std::cout << i << std::endl;
-
-    // JsonParser test(str);
+    for (auto& item : pt.get_child("feed"))
+        r.push_back(item.second.get<std::string>("title"));
+    
+    for (int i = 0; i < r.size(); ++i)
+        std::cout << "Title: " << r[i] << '\n' << std::endl;
 
     return 0;
 }
