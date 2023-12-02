@@ -18,7 +18,7 @@ if [[ ! -d $qtDir ]]; then
 	fi
 fi
 
-cmake -G "Ninja" -B "build" -DCMAKE_PREFIX_PATH=$prefixVar
+cmake -G "MinGW Makefiles" -B "build" -DCMAKE_PREFIX_PATH=$prefixVar
 
 cd build
 cmake --build .

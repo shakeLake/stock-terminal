@@ -37,3 +37,16 @@ std::string APICall::NEWS_SENTIMENT(std::string ticker)
 
     return target;
 }
+
+std::string APICall::CURRENCY_EXCHANGE_RATE(std::string first, 
+                                            std::string second)
+{
+    std::string target = "/query?function=CURRENCY_EXCHANGE_RATE&from_currency=" 
+                            + first 
+                            + "&to_currency="
+                            + second
+                            + "&apikey="
+                            + apiKey;
+
+    return target;
+}

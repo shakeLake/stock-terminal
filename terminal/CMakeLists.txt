@@ -21,6 +21,8 @@ set(APP_SOURCE
         "include/review.hpp"
         newsfeed.cpp
         "include/newsfeed.hpp"
+        stockform.cpp
+        "include/stockform.hpp"
 )
 
 add_library(app-lib STATIC ${APP_SOURCE})
@@ -29,5 +31,5 @@ target_link_libraries(app-lib PUBLIC Qt6::Core)
 target_link_libraries(app-lib PUBLIC Qt6::Widgets)
 target_link_libraries(app-lib PUBLIC Qt6::Gui)
 
-add_executable(Terminal app.cpp)
+add_executable(Terminal rmap.qrc app.cpp)
 target_link_libraries(Terminal PRIVATE app-lib)

@@ -1,0 +1,16 @@
+<RCC>
+	<qresource prefix="/">
+		<file>Resources/logo/AAPL.png</file>
+		<file>Resources/logo/AMZN.png</file>
+		<file>Resources/logo/Brent.png</file>
+		<file>Resources/logo/BTC.png</file>
+		<file>Resources/logo/GOLD.png</file>
+		<file>Resources/logo/GOOG.png</file>
+		<file>Resources/logo/META.png</file>
+		<file>Resources/logo/MSFT.png</file>
+		<file>Resources/logo/Nasdaq.png</file>
+		<file>Resources/logo/NVIDIA.png</file>
+		<file>Resources/logo/SPGI.png</file>
+		<file>Resources/logo/TSLA.png</file>
+	</qresource>
+</RCC>

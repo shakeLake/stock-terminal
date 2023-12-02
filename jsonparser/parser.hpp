@@ -9,10 +9,17 @@ using namespace boost::property_tree;
 
 class JsonParser
 {
+private:
+    ptree pt;
+
 public:
     JsonParser() = delete;
 
-    JsonParser(std::string);
+    JsonParser(std::stringstream buffer)
+    {
+        json_parser::read_json(buffer, pt);
+    }
+
     ~JsonParser() = default;
 
 };

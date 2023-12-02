@@ -8,6 +8,9 @@ int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
 
+    QFont font("Helvetica");
+    QApplication::setFont(font);
+
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect  screenGeometry = screen->geometry();
     int height = screenGeometry.height();

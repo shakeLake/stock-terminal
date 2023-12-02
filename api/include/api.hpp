@@ -23,6 +23,10 @@ public:
     // Alpha Intelligence
     std::string NEWS_SENTIMENT(std::string /*ticker*/);
 
+    // cryptocurrencies
+    std::string CURRENCY_EXCHANGE_RATE(std::string /* first */, 
+                                       std::string /* second */);
+
 };
 
 #endif /* API_HPP_ */

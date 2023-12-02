@@ -3,14 +3,15 @@
 
 int main()
 {
-    // std::ifstream cin("fl.json");
-    // std::stringstream buffer;
-    // buffer << cin.rdbuf();
+    std::ifstream cin("fl.json");
+    std::stringstream buffer;
+    buffer << cin.rdbuf();
+    cin.close();
 
     // std::string str = buffer.str();
 
     ptree pt;
-    json_parser::read_json("fl.json", pt);
+    json_parser::read_json(buffer, pt);
 
     int test = pt.get<int>("items");
     std::cout << test << std::endl;
@@ -23,8 +24,6 @@ int main()
             std::string tst = sitem.second.get_value<std::string>();
             std::cout << tst << std::endl;
         }
-
-        // r.push_back(item.second.get<std::string>("title"));
     }
 
     // titles
