@@ -11,7 +11,7 @@ ToolBar::ToolBar()
 
     stuff["GOLD"]   = new QLabel("-1");
     stuff["AAPL"]   = new QLabel("-1");
-    stuff["SPGI"]   = new QLabel("-1");
+    stuff["SPX"]   = new QLabel("-1");
     stuff["Nasdaq"] = new QLabel("-1");
     stuff["NVIDIA"] = new QLabel("-1"); 
     stuff["AMZN"]   = new QLabel("-1"); 
@@ -31,7 +31,7 @@ ToolBar::ToolBar()
     main_layout->addWidget(GetTicker("AAPL"));
     main_layout->addWidget(new QLabel("  "));
 
-    main_layout->addWidget(GetTicker("SPGI"));
+    main_layout->addWidget(GetTicker("SPX"));
     main_layout->addWidget(new QLabel("  "));
 
     main_layout->addWidget(GetTicker("Nasdaq"));

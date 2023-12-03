@@ -10,7 +10,8 @@
 		<file>Resources/logo/MSFT.png</file>
 		<file>Resources/logo/Nasdaq.png</file>
 		<file>Resources/logo/NVIDIA.png</file>
-		<file>Resources/logo/SPGI.png</file>
+		<file>Resources/logo/SPX.png</file>
 		<file>Resources/logo/TSLA.png</file>
+		<file>Resources/logo/site.png</file>
 	</qresource>
 </RCC>
