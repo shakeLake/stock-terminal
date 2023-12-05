@@ -13,23 +13,23 @@
 class NewsFeed : public QDockWidget
 {
 private:
-    QWidget* main_widget;
-    QVBoxLayout* main_layout;
+	QWidget* main_widget;
+	QVBoxLayout* main_layout;
 
-    // scroll area
-    QWidget* scroll_widget;
-    QVBoxLayout* scroll_layout;
-    QScrollArea* scroll_area;
+	// scroll area
+	QWidget* scroll_widget;
+	QVBoxLayout* scroll_layout;
+	QScrollArea* scroll_area;
 
 private:
-    void NewNewsBlock(std::string&, std::string&, std::string&);
-    void GetScrollArea();
+	void NewNewsBlock(std::string&, std::string&, std::string&);
+	void GetScrollArea();
 
 public:
-    NewsFeed();
-    ~NewsFeed() = default;
+	NewsFeed();
+	~NewsFeed() = default;
 
-    QDockWidget* operator()();
+	QDockWidget* operator()();
 
 };
 

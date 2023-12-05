@@ -6,18 +6,18 @@
 
 int main(int argc, char** argv)
 {
-    QApplication app(argc, argv);
+	QApplication app(argc, argv);
 
-    QFont font("Helvetica");
-    QApplication::setFont(font);
+	QFont font("Helvetica");
+	QApplication::setFont(font);
 
-    QScreen *screen = QGuiApplication::primaryScreen();
-    QRect  screenGeometry = screen->geometry();
-    int height = screenGeometry.height();
-    int width = screenGeometry.width();
+	QScreen *screen = QGuiApplication::primaryScreen();
+	QRect  screenGeometry = screen->geometry();
+	int height = screenGeometry.height();
+	int width = screenGeometry.width();
 
-    UserInterface ui(height, width);
-    ui.show();
+	UserInterface ui(height, width);
+	ui.show();
 
-    return app.exec();
+	return app.exec();
 }

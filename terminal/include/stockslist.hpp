@@ -19,34 +19,33 @@
 class StockList : public QDockWidget
 {
 private:
-    QWidget* main_widget;
-    QVBoxLayout* main_layout;
+	QWidget* main_widget;
+	QVBoxLayout* main_layout;
 
-    // search
-    QLineEdit* search;
+	// search
+	QLineEdit* search;
 
-    // list
-    QWidget* table_widget;
-    QTableWidget* table;
-    QStringList ctable_name;
+	// list
+	QWidget* table_widget;
+	QTableWidget* table;
+	QStringList ctable_name;
 
-    // proceed
-    QWidget* proceed_widget;
-    QHBoxLayout* proceed_layout;
-    QPushButton* proceed;
-    QLabel* explanation;
+	// proceed
+	QWidget* proceed_widget;
+	QHBoxLayout* proceed_layout;
+	QPushButton* proceed;
 
 private:
-    void GetSearchBar();
-    void GetStockList();
-    QWidget* StockCheckBox(std::string);
-    void GetProceedMenu();
+	void GetSearchBar();
+	void GetStockList();
+	QWidget* StockCheckBox(std::string);
+	void GetProceedMenu();
 
 public:
-    StockList();
-    ~StockList() = default;
+	StockList();
+	~StockList() = default;
 
-    QDockWidget* operator()();
+	QDockWidget* operator()();
 
 };
 
