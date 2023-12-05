@@ -8,10 +8,10 @@
 class Review : public QDockWidget
 {
 public:
-    Review();
-    ~Review() = default;
+	Review();
+	~Review() = default;
 
-    QDockWidget* operator()();
+	QDockWidget* operator()();
 
 };
 

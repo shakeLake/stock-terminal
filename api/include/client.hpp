@@ -9,14 +9,14 @@
 class Client
 {
 private:
-    net::io_context io_c;
-    ssl::context ctx;
+	net::io_context io_c;
+	ssl::context ctx;
 
-    APICall* api;
+	APICall* api;
 
 public:
-    Client();
-    ~Client();
+	Client();
+	~Client();
 
 };
 

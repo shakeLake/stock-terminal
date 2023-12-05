@@ -7,15 +7,15 @@
 class StockForm : public QLabel
 {
 // private:
-    // std::unordered_map<std::string, QLabel*> stock_storage;
+	// std::unordered_map<std::string, QLabel*> stock_storage;
 
 public:
-    StockForm() = default;
-    ~StockForm() = default;
+	StockForm() = default;
+	~StockForm() = default;
 
-    void SetLabelDesignToolBar(QLabel*, std::string);
+	void SetLabelDesignToolBar(QLabel*, std::string);
 
-    // QLabel* operator()(std::string);
+	// QLabel* operator()(std::string);
 
 };
 

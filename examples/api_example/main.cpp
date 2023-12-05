@@ -2,7 +2,7 @@
 
 int main()
 {
-    Client cli;
+	Client cli;
 
-    return 0;
+	return 0;
 }

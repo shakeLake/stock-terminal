@@ -2,13 +2,13 @@
 
 UserInterface::UserInterface(int height, int width)
 {
-    setWindowTitle("Terminal");
-    resize(width, height);
+	setWindowTitle("Terminal");
+	resize(width, height);
 
-    setStyleSheet("background-color: #17232D");
+	setStyleSheet("background-color: #17232D");
 
-    addToolBar(GetToolBar());
-    addDockWidget(Qt::LeftDockWidgetArea, GetNewsFeed());
-    addDockWidget(Qt::RightDockWidgetArea, GetReviewMenu());
-    addDockWidget(Qt::RightDockWidgetArea, GetStockList());
+	addToolBar(GetToolBar());
+	addDockWidget(Qt::LeftDockWidgetArea, GetNewsFeed());
+	addDockWidget(Qt::RightDockWidgetArea, GetReviewMenu());
+	addDockWidget(Qt::RightDockWidgetArea, GetStockList());
 }

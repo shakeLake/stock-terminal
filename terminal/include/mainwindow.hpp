@@ -11,14 +11,14 @@
 class UserInterface : public QMainWindow
 {
 private:
-    ToolBar GetToolBar;
-    StockList GetStockList;
-    Review GetReviewMenu;
-    NewsFeed GetNewsFeed;
+	ToolBar GetToolBar;
+	StockList GetStockList;
+	Review GetReviewMenu;
+	NewsFeed GetNewsFeed;
 
 public:
-    UserInterface(int, int);
-    ~UserInterface() = default;
+	UserInterface(int, int);
+	~UserInterface() = default;
 
 };
 

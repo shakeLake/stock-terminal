@@ -2,20 +2,20 @@
 
 Review::Review()
 {
-    // setFeatures(QDockWidget::NoDockWidgetFeatures);
+	// setFeatures(QDockWidget::NoDockWidgetFeatures);
 
-    // hides title bar
-    setTitleBarWidget(new QWidget);    
+	// hides title bar
+	setTitleBarWidget(new QWidget);	
 
-    QWidget* container = new QWidget;
-    setWidget(container);
+	QWidget* container = new QWidget;
+	setWidget(container);
 
-    container->setStyleSheet("background-color: black");
+	container->setStyleSheet("background-color: black");
 
-    QVBoxLayout* layout = new QVBoxLayout(container);
+	QVBoxLayout* layout = new QVBoxLayout(container);
 }
 
 QDockWidget* Review::operator()()
 {
-    return this;
+	return this;
 }
