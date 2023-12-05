@@ -5,7 +5,6 @@ NewsFeed::NewsFeed()
     setFeatures(QDockWidget::NoDockWidgetFeatures);
 
     setWindowTitle("news sentiments");                
-
     setStyleSheet("QDockWidget {color: #B9CCDB; font-weight: bold; font-size: 12px}");
 
     main_widget = new QWidget;
@@ -19,7 +18,7 @@ NewsFeed::NewsFeed()
     std::string titl = "Apple Is Far Less Important to Berkshire Hathaway Than You Think";
     std::string desc = "What is Warren Buffett-led Berkshire Hathaway really worth?";
     std::string url = "http://example.com/";
-    NewNewsBlock(titl, desc, url);
+    // NewNewsBlock(titl, desc, url);
 }
 
 QDockWidget* NewsFeed::operator()()
@@ -31,8 +30,8 @@ void NewsFeed::GetScrollArea()
 {
     scroll_widget = new QWidget;
     scroll_layout = new QVBoxLayout(scroll_widget);
+
 	scroll_layout->setSpacing(20);
-	scroll_layout->addStretch(10);
 
     scroll_area = new QScrollArea;
     scroll_area->setAlignment(Qt::AlignTop);
