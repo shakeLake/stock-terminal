@@ -16,6 +16,8 @@
 
 #include <QVBoxLayout>
 
+#include "completer.hpp"
+
 class StockList : public QDockWidget
 {
 private:

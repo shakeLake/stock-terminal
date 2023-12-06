@@ -38,6 +38,8 @@ QDockWidget* StockList::operator()()
 void StockList::GetSearchBar()
 {
 	search = new QLineEdit;
+	search->setCompleter(Completer()(":Resources/listing.txt"));
+	
 	search->setPlaceholderText(" Search for a ticker (For example: AAPL)");
 	search->setFixedHeight(35);
 

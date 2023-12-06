@@ -23,6 +23,8 @@ set(APP_SOURCE
         "include/newsfeed.hpp"
         stockform.cpp
         "include/stockform.hpp"
+        completer.cpp
+        "include/completer.hpp"
 )
 
 add_library(app-lib STATIC ${APP_SOURCE})

@@ -13,5 +13,7 @@
 		<file>Resources/logo/SPX.png</file>
 		<file>Resources/logo/TSLA.png</file>
 		<file>Resources/logo/site.png</file>
+
+		<file>Resources/listing.txt</file>
 	</qresource>
 </RCC>
