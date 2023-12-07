@@ -19,12 +19,12 @@ StockList::StockList()
 
 	GetStockList();
 
-	table->setCellWidget(0, 0, StockCheckBox("AAPL"));
-	table->setCellWidget(0, 1, new QLabel("912.2323"));
-	table->setCellWidget(0, 2, new QLabel("182.2323"));
-	table->setCellWidget(0, 3, new QLabel("032.2323"));
-	table->setCellWidget(0, 4, new QLabel("83.2323"));
-	table->setCellWidget(0, 5, new QLabel("233.2323"));
+	// table->setCellWidget(0, 0, StockCheckBox("AAPL"));
+	// table->setCellWidget(0, 1, new QLabel("912.2323"));
+	// table->setCellWidget(0, 2, new QLabel("182.2323"));
+	// table->setCellWidget(0, 3, new QLabel("032.2323"));
+	// table->setCellWidget(0, 4, new QLabel("83.2323"));
+	// table->setCellWidget(0, 5, new QLabel("233.2323"));
 
 	main_layout->addSpacing(10);
 	GetProceedMenu();
@@ -38,7 +38,8 @@ QDockWidget* StockList::operator()()
 void StockList::GetSearchBar()
 {
 	search = new QLineEdit;
-	search->setCompleter(Completer()(":Resources/listing.txt"));
+	completer = Completer()(":Resources/listing.txt");
+	search->setCompleter(completer);
 	
 	search->setPlaceholderText(" Search for a ticker (For example: AAPL)");
 	search->setFixedHeight(35);
@@ -48,6 +49,9 @@ void StockList::GetSearchBar()
 							"border-radius: 5px;"
 							"font-size: 14px;"
 							"font-weight: bold");
+							
+	connect(search, &QLineEdit::returnPressed, this, &StockList::TakeFromLineEdit);
+	// connect(completer, &QCompleter::activated, this, &StockList::TakeFromLineEdit);
 
 	main_layout->addWidget(search);
 }
@@ -55,7 +59,7 @@ void StockList::GetSearchBar()
 void StockList::GetStockList()
 {
 	// table_widget = new QWidget;
-	table = new QTableWidget(5, 6);
+	table = new QTableWidget(0, 6);
 
 	// 
 	table->verticalHeader()->setVisible(false);
@@ -107,4 +111,24 @@ void StockList::GetProceedMenu()
 	proceed_layout->addWidget(proceed, Qt::AlignRight);
 
 	main_layout->addWidget(proceed_widget);
+}
+
+void StockList::TakeFromLineEdit()
+{
+	QString buf = search->text();
+	search->clear();
+
+	if (buf.isEmpty())
+		return;
+
+	std::string line = buf.toStdString();
+	
+	if (taken.find(line) == taken.end())
+	{
+		table->insertRow( table->rowCount() );
+		table->setCellWidget(cellPointer, 0, StockCheckBox(line));
+
+		taken[line] = cellPointer;
+		cellPointer += 1;
+	}
 }

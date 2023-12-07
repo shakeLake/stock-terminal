@@ -11,21 +11,27 @@
 #include <QCheckBox>
 #include <QLabel>
 #include <QStringList>
-#include <QHeaderView>
 #include <QPushButton>
 
 #include <QVBoxLayout>
+#include <QHeaderView>
+
+#include <unordered_map>
 
 #include "completer.hpp"
 
 class StockList : public QDockWidget
 {
+	Q_OBJECT
 private:
 	QWidget* main_widget;
 	QVBoxLayout* main_layout;
 
 	// search
 	QLineEdit* search;
+	QCompleter* completer;
+	std::unordered_map<std::string, int> taken;
+	int cellPointer = 0;
 
 	// list
 	QWidget* table_widget;
@@ -42,6 +48,9 @@ private:
 	void GetStockList();
 	QWidget* StockCheckBox(std::string);
 	void GetProceedMenu();
+
+private slots:
+	void TakeFromLineEdit();
 
 public:
 	StockList();
