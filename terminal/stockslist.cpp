@@ -19,13 +19,6 @@ StockList::StockList()
 
 	GetStockList();
 
-	// table->setCellWidget(0, 0, StockCheckBox("AAPL"));
-	// table->setCellWidget(0, 1, new QLabel("912.2323"));
-	// table->setCellWidget(0, 2, new QLabel("182.2323"));
-	// table->setCellWidget(0, 3, new QLabel("032.2323"));
-	// table->setCellWidget(0, 4, new QLabel("83.2323"));
-	// table->setCellWidget(0, 5, new QLabel("233.2323"));
-
 	main_layout->addSpacing(10);
 	GetProceedMenu();
 }
@@ -50,8 +43,11 @@ void StockList::GetSearchBar()
 							"font-size: 14px;"
 							"font-weight: bold");
 							
-	connect(search, &QLineEdit::returnPressed, this, &StockList::TakeFromLineEdit);
+	// connect(search, &QLineEdit::returnPressed, this, &StockList::TakeFromLineEdit);
 	// connect(completer, &QCompleter::activated, this, &StockList::TakeFromLineEdit);
+	QObject::connect(completer, SIGNAL(activated(const QString&)),
+                 this, SLOT(TakeFromLineEdit()),
+                 Qt::QueuedConnection);
 
 	main_layout->addWidget(search);
 }
@@ -87,10 +83,42 @@ void StockList::GetStockList()
 
 QWidget* StockList::StockCheckBox(std::string stock_name)
 {
-	QWidget* check_box_widget = new QWidget;
-	QCheckBox* check_box = new QCheckBox(QString::fromStdString(stock_name), check_box_widget);
+	QWidget* checkbox_widget = new QWidget;
+	QHBoxLayout* checkbox_layout = new QHBoxLayout(checkbox_widget);
 
-	return check_box_widget;
+	QPushButton* icon = new QPushButton;
+	QString path = ":/Resources/logo/";
+	path += stock_name + ".png";
+	icon->setIcon(QIcon(path));
+	icon->setFixedSize(15, 15);
+	icon->setStyleSheet("border: none");
+
+	QLabel* stock = new QLabel(QString::fromStdString(stock_name));
+	stock->setStyleSheet("font-weight: bold;"
+						 "font-size: 15px;"
+						 "color: white;");
+
+	QCheckBox* check_box = new QCheckBox;
+	check_box->setStyleSheet("QCheckBox::indicator:checked"
+							 "{"
+								"image: url(:/Resources/icons/checkbox_checked.png);"
+							 "}"
+							"QCheckBox::indicator:unchecked" 
+							 "{"
+								"image: url(:/Resources/icons/checkbox_unchecked.png);"
+							 "}"
+							 "QCheckBox::indicator"
+							 "{"
+							 	"width: 15px;"
+							 	"height: 15px;"
+							 "}"
+	);
+
+	checkbox_layout->addWidget(check_box);
+	checkbox_layout->addWidget(icon);
+	checkbox_layout->addWidget(stock);
+
+	return checkbox_widget;
 }
 
 void StockList::GetProceedMenu()
@@ -127,6 +155,10 @@ void StockList::TakeFromLineEdit()
 	{
 		table->insertRow( table->rowCount() );
 		table->setCellWidget(cellPointer, 0, StockCheckBox(line));
+
+		QHeaderView* header = table->verticalHeader();
+		header->setDefaultSectionSize(40);
+		header->sectionResizeMode(QHeaderView::Fixed);
 
 		taken[line] = cellPointer;
 		cellPointer += 1;

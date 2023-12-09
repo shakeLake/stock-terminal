@@ -1,6 +1,8 @@
 #ifndef STOCKLIST_HPP_
 #define STOCKLIST_HPP_
 
+#include <iostream>
+
 #include <QApplication>
 #include <QScreen>
 

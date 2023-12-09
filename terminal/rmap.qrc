@@ -15,5 +15,8 @@
 		<file>Resources/logo/site.png</file>
 
 		<file>Resources/listing.txt</file>
+
+		<file>Resources/icons/checkbox_checked.png</file>
+		<file>Resources/icons/checkbox_unchecked.png</file>
 	</qresource>
 </RCC>
