@@ -1,5 +1,7 @@
 build/
 qt-dpndncy/
+terminal/Resources/
+terminal/Resources/logolist/
 
 # vim swap files
 

@@ -1,5 +1,21 @@
 <RCC>
 	<qresource prefix="/">
+		<file>Resources/logolist/AAPL.png</file>
+		<file>Resources/logolist/AMZN.png</file>
+		<file>Resources/logolist/META.png</file>
+		<file>Resources/logolist/MSFT.png</file>
+		<file>Resources/logolist/AMD.png</file>
+		<file>Resources/logolist/DIS.png</file>
+		<file>Resources/logolist/F.png</file>
+		<file>Resources/logolist/KO.png</file>
+		<file>Resources/logolist/XOM.png</file>
+		<file>Resources/logolist/NVDA.png</file>
+		<file>Resources/logolist/INTC.png</file>
+		<file>Resources/logolist/NFLX.png</file>
+		<file>Resources/logolist/GOOG.png</file>
+		<file>Resources/logolist/GOOGL.png</file>
+		<file>Resources/logolist/TSLA.png</file>
+		
 		<file>Resources/logo/AAPL.png</file>
 		<file>Resources/logo/AMZN.png</file>
 		<file>Resources/logo/Brent.png</file>

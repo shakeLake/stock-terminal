@@ -43,11 +43,9 @@ void StockList::GetSearchBar()
 							"font-size: 14px;"
 							"font-weight: bold");
 							
-	// connect(search, &QLineEdit::returnPressed, this, &StockList::TakeFromLineEdit);
-	// connect(completer, &QCompleter::activated, this, &StockList::TakeFromLineEdit);
 	QObject::connect(completer, SIGNAL(activated(const QString&)),
-                 this, SLOT(TakeFromLineEdit()),
-                 Qt::QueuedConnection);
+					this, SLOT(TakeFromLineEdit()),
+					Qt::QueuedConnection);
 
 	main_layout->addWidget(search);
 }
@@ -87,10 +85,10 @@ QWidget* StockList::StockCheckBox(std::string stock_name)
 	QHBoxLayout* checkbox_layout = new QHBoxLayout(checkbox_widget);
 
 	QPushButton* icon = new QPushButton;
-	QString path = ":/Resources/logo/";
+	QString path = ":/Resources/logolist/";
 	path += stock_name + ".png";
 	icon->setIcon(QIcon(path));
-	icon->setFixedSize(15, 15);
+	icon->setIconSize(QSize(20, 20));
 	icon->setStyleSheet("border: none");
 
 	QLabel* stock = new QLabel(QString::fromStdString(stock_name));
