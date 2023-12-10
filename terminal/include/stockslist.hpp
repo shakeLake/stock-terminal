@@ -21,6 +21,7 @@
 #include <QFile>
 
 #include <unordered_map>
+#include <map>
 
 #include "completer.hpp"
 
@@ -42,6 +43,10 @@ private:
 	QTableWidget* table;
 	QStringList ctable_name;
 
+	// save widgets to change their color
+	std::map<std::pair<int , int>, QWidget*> cell_data;
+	std::pair<int, int> prev_widget = std::make_pair(-1, -1);
+
 	// proceed
 	QWidget* proceed_widget;
 	QHBoxLayout* proceed_layout;
@@ -55,6 +60,7 @@ private:
 
 private slots:
 	void TakeFromLineEdit();
+	void ActivateCheckWidget(int, int);
 
 public:
 	StockList();

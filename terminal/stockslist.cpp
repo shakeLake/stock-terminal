@@ -54,6 +54,7 @@ void StockList::GetStockList()
 {
 	// table_widget = new QWidget;
 	table = new QTableWidget(0, 6);
+	connect(table, SIGNAL(cellClicked(int, int)), this, SLOT(ActivateCheckWidget(int, int)));
 
 	// 
 	table->verticalHeader()->setVisible(false);
@@ -61,6 +62,7 @@ void StockList::GetStockList()
 	table->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	table->setSelectionBehavior(QAbstractItemView::SelectRows);
 	table->setSelectionMode(QAbstractItemView::SingleSelection);
+	table->setFocusPolicy(Qt::NoFocus);
 	table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
 	table->setFrameStyle(QFrame::NoFrame);
@@ -70,6 +72,10 @@ void StockList::GetStockList()
 							"background-color: transparent;" 
 							"color: #B9CCDB;"
 							"font-weight: bold;"
+						"}"
+						"QTableWidget::item"
+						"{"
+							"background-color: transparent"
 						"}"
 	);
 
@@ -165,7 +171,10 @@ void StockList::TakeFromLineEdit()
 	if (taken.find(line) == taken.end())
 	{
 		table->insertRow( table->rowCount() );
-		table->setCellWidget(cellPointer, 0, StockCheckBox(line));
+
+		std::pair<int, int> bufp = std::make_pair(cellPointer, 0);
+		cell_data[bufp] = StockCheckBox(line);
+		table->setCellWidget(cellPointer, 0, cell_data[bufp]);
 
 		QHeaderView* header = table->verticalHeader();
 		header->setDefaultSectionSize(40);
@@ -174,4 +183,17 @@ void StockList::TakeFromLineEdit()
 		taken[line] = cellPointer;
 		cellPointer += 1;
 	}
+}
+
+void StockList::ActivateCheckWidget(int row, int col)
+{
+	if (prev_widget.first != -1)
+		cell_data[prev_widget]->setStyleSheet("background-color: transparent;");
+
+	std::pair<int, int> bufp = std::make_pair(row, col);
+
+	QWidget* widg = cell_data[bufp];
+	widg->setStyleSheet("background-color: #273E4E");
+
+	prev_widget = bufp;
 }
