@@ -87,7 +87,20 @@ QWidget* StockList::StockCheckBox(std::string stock_name)
 	QPushButton* icon = new QPushButton;
 	QString path = ":/Resources/logolist/";
 	path += stock_name + ".png";
-	icon->setIcon(QIcon(path));
+
+	if (QFile::exists(path))
+		icon->setIcon(QIcon(path));
+	else
+	{
+		path = ":/Resources/logolist/";
+
+		QString buf = QChar::fromLatin1(stock_name[0]);
+		path += buf;
+		path += "0.png";
+
+		icon->setIcon(QIcon(path));
+	}
+
 	icon->setIconSize(QSize(20, 20));
 	icon->setStyleSheet("border: none");
 

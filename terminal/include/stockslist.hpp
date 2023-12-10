@@ -18,6 +18,8 @@
 #include <QVBoxLayout>
 #include <QHeaderView>
 
+#include <QFile>
+
 #include <unordered_map>
 
 #include "completer.hpp"
