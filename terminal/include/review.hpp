@@ -4,6 +4,7 @@
 #include <QDockWidget>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <QtCharts>
 
 class Review : public QDockWidget
 {

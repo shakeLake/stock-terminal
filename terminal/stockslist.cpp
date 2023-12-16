@@ -195,5 +195,10 @@ void StockList::ActivateCheckWidget(int row, int col)
 	QWidget* widg = cell_data[bufp];
 	widg->setStyleSheet("background-color: #273E4E");
 
+	/*
+		if checkbox is not checked it shows dialog window
+		"Request the stock info"
+	*/
+
 	prev_widget = bufp;
 }

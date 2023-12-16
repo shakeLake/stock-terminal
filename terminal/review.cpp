@@ -2,15 +2,15 @@
 
 Review::Review()
 {
-	// setFeatures(QDockWidget::NoDockWidgetFeatures);
+	setFeatures(QDockWidget::NoDockWidgetFeatures);
 
-	// hides title bar
-	setTitleBarWidget(new QWidget);	
+	setWindowTitle("Review");				
+	setStyleSheet("QDockWidget {color: #B9CCDB; font-weight: bold; font-size: 12px}");
 
 	QWidget* container = new QWidget;
 	setWidget(container);
 
-	container->setStyleSheet("background-color: black");
+	container->setStyleSheet("background-color: #1E2C38");
 
 	QVBoxLayout* layout = new QVBoxLayout(container);
 }

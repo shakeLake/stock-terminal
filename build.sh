@@ -1,6 +1,6 @@
 #!/bin/bash
 
-prefixVar="../qt-dpndncy/lib/cmake"
+prefixVar="C:/qt6/qt6-build/qtbase/lib/cmake"
 qtDir="qt-dpndncy"
 
 if [[ ! -d $qtDir ]]; then
