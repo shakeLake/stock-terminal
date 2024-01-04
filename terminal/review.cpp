@@ -15,7 +15,7 @@ Review::Review()
 	QVBoxLayout* layout = new QVBoxLayout(container);
 
 	// candle
-	auto Series = new QCandlestickSeries;
+	QCandlestickSeries* Series = new QCandlestickSeries;
 	Series->setName("Name");
 	Series->setIncreasingColor(QColor(Qt::green));
 	Series->setDecreasingColor(QColor(Qt::red));
@@ -26,15 +26,17 @@ Review::Review()
 									 ****
 		std::string company_ticker = AAPL.json; 
 	*/
+	JsonParser p;
 	std::vector<TimeSeries> ohlc = std::move(p.ReadTimeSeries("fl1.json"));
 	
 	for (auto& item : ohlc)
 	{
-		QCandlestickSet *set = new QCandlestickSet(item.timestamp);
-		candlestickSet->setOpen(item.open);
-		candlestickSet->setHigh(item.high);
-		candlestickSet->setLow(item.low);
-		candlestickSet->setClose(item.close);
+		std::cout << item.timestamp << std::endl;
+		QCandlestickSet *set = new QCandlestickSet((int)item.timestamp);
+		set->setOpen(item.open);
+		set->setHigh(item.high);
+		set->setLow(item.low);
+		set->setClose(item.close);
 
 		if (set) 
 		{
@@ -62,6 +64,9 @@ Review::Review()
 	chart->legend()->setAlignment(Qt::AlignBottom);
 
 	// createDefaultChartView(chart);
+
+	QChartView* chartView = new QChartView(chart);
+	layout->addWidget(chartView);
 }
 
 QDockWidget* Review::operator()()

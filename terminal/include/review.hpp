@@ -6,9 +6,12 @@
 #include <QWidget>
 
 #include <QChart>
+#include <QChartView>
 #include <QBarCategoryAxis>
 #include <QValueAxis>
 #include <QCandlestickSeries>
+#include <QCandlestickSet>
+#include <QDateTime>
 
 #include "../../jsonparser/parser.hpp"
 

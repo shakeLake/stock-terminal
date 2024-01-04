@@ -5,12 +5,20 @@ project(ui)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOMOC ON)
 
+# error LNK2038: mismatch detected for 
+# '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0'
+
+if (MSVC)
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MD")
+endif()
+
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Gui)
 find_package(Qt6 REQUIRED COMPONENTS Charts)
 
-add_subdirectory("../jsonparser" "jsonparser-build")
+add_subdirectory("../jsonparser" "jsonparser-build-terminal")
 
 set(APP_SOURCE
         app.cpp

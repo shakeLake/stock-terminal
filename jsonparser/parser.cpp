@@ -35,7 +35,7 @@ auto GetTimeStamp = [](std::string time) -> double
 
                         std::time_t time_stamp = mktime(&t);
                         
-                        return (double)time_stamp;
+                        return static_cast<double>(time_stamp);
                     };
 
 std::vector<TimeSeries> JsonParser::ReadTimeSeries(std::string path)
