@@ -46,10 +46,7 @@ std::vector<TimeSeries> JsonParser::ReadTimeSeries(std::string path)
 
         int i = 0;
         for (auto& sitem : item.second)
-        {
             arr[i++] = sitem.second.get_value<double>(); 
-            if (i == 5) break;
-        }
 
         buf.open   = arr[0];
         buf.high   = arr[1];

@@ -22,7 +22,7 @@ int main()
 		std::cout << ' ' << ts[i].high;
 		std::cout << ' ' << ts[i].low;
 		std::cout << ' ' << ts[i].close;
-		std::cout << ' ' << ts[i].volume << std::endl;
+		std::cout << ' ' << (int)ts[i].volume << std::endl;
 		std::cout << "-----------" << std::endl;
 	}
 
