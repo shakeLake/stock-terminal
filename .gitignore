@@ -2,6 +2,7 @@ build/
 qt-dpndncy/
 terminal/Resources/
 terminal/Resources/logolist/
+third-party/qt6/
 
 # vim swap files
 

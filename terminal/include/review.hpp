@@ -4,10 +4,15 @@
 #include <QDockWidget>
 #include <QVBoxLayout>
 #include <QWidget>
-#include <QtCharts>
+
+#include <QChart>
+#include <QBarCategoryAxis>
+#include <QValueAxis>
+#include <QCandlestickSeries>
 
 class Review : public QDockWidget
 {
+	Q_OBJECT
 public:
 	Review();
 	~Review() = default;

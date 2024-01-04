@@ -3,6 +3,21 @@
 
 int main()
 {
+	JsonParser p;
+
+    // std::vector<NewsItem> news = std::move(p.ReadNews("fl.json"));
+
+	// for (int i = 0; i < news.size(); ++i)
+	// {
+	// 	std::cout << news[i].title;
+	// 	std::cout << ' ' << news[i].summary;
+	// 	std::cout << ' ' << news[i].url;
+	// }
+
+	return 0;
+}
+
+/*
 	std::ifstream cin("fl.json");
 	std::stringstream buffer;
 	buffer << cin.rdbuf();
@@ -33,6 +48,4 @@ int main()
 	
 	for (int i = 0; i < r.size(); ++i)
 		std::cout << "Title: " << r[i] << '\n' << std::endl;
-
-	return 0;
-}
+*/
