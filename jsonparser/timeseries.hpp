@@ -13,8 +13,19 @@ public:
     double close;
     double volume;
 
-private:
+public:
     TimeSeries() = default;
+
+    TimeSeries(const TimeSeries& t)
+    {
+        timestamp = t.timestamp;
+        open = t.open; 
+        high = t.high;
+        low = t.low;
+        close = t.close;
+        volume = t.volume;
+    }
+
     ~TimeSeries() = default;
 
 };

@@ -14,6 +14,18 @@ int main()
 	// 	std::cout << ' ' << news[i].url;
 	// }
 
+	std::vector<TimeSeries> ts = std::move(p.ReadTimeSeries("fl1.json"));
+
+	for (int i = 0; i < ts.size(); ++i)
+	{
+		std::cout << ts[i].open;
+		std::cout << ' ' << ts[i].high;
+		std::cout << ' ' << ts[i].low;
+		std::cout << ' ' << ts[i].close;
+		std::cout << ' ' << ts[i].volume << std::endl;
+		std::cout << "-----------" << std::endl;
+	}
+
 	return 0;
 }
 
