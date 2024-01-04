@@ -26,6 +26,18 @@ std::vector<NewsItem> JsonParser::ReadNews(std::string path)
     return news;
 }
 
+auto GetTimeStamp = [](std::string time) -> double
+                    {
+                        std::tm t {};
+                        std::istringstream iss(time);
+                        
+                        iss >> std::get_time(&t, "%Y-%m-%d");
+
+                        std::time_t time_stamp = mktime(&t);
+                        
+                        return (double)time_stamp;
+                    };
+
 std::vector<TimeSeries> JsonParser::ReadTimeSeries(std::string path)
 {
     cin.open(path);
@@ -42,7 +54,7 @@ std::vector<TimeSeries> JsonParser::ReadTimeSeries(std::string path)
     for (auto& item : pt.get_child("Time Series (Daily)"))
     {
         TimeSeries buf;
-        buf.timestamp = item.first;
+        buf.timestamp = GetTimeStamp(item.first);
 
         int i = 0;
         for (auto& sitem : item.second)

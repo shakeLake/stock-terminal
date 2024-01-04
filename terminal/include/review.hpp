@@ -10,6 +10,8 @@
 #include <QValueAxis>
 #include <QCandlestickSeries>
 
+#include "../../jsonparser/parser.hpp"
+
 class Review : public QDockWidget
 {
 	Q_OBJECT

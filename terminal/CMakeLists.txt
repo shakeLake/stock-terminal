@@ -10,6 +10,8 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Gui)
 find_package(Qt6 REQUIRED COMPONENTS Charts)
 
+add_subdirectory("../jsonparser" "jsonparser-build")
+
 set(APP_SOURCE
         app.cpp
         mainwindow.cpp
@@ -34,6 +36,7 @@ target_link_libraries(app-lib PUBLIC Qt6::Core)
 target_link_libraries(app-lib PUBLIC Qt6::Widgets)
 target_link_libraries(app-lib PUBLIC Qt6::Gui)
 target_link_libraries(app-lib PUBLIC Qt6::Charts)
+target_link_libraries(app-lib PUBLIC json-parser-lib)
 
 add_executable(Terminal rmap.qrc app.cpp)
 target_link_libraries(Terminal PRIVATE app-lib)

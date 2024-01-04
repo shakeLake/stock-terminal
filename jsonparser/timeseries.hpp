@@ -6,7 +6,7 @@
 class TimeSeries
 {
 public:
-    std::string timestamp;
+    double timestamp;
     double open;
     double high;
     double low;

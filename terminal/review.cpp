@@ -20,16 +20,28 @@ Review::Review()
 	Series->setIncreasingColor(QColor(Qt::green));
 	Series->setDecreasingColor(QColor(Qt::red));
 
-	// QStringList categories;
+	QStringList categories;
 
-	// CandlestickDataReader dataReader(&acmeData);
-	// while (!dataReader.atEnd()) {
-	// 	QCandlestickSet *set = dataReader.readCandlestickSet();
-	// 	if (set) {
-	// 		Series->append(set);
-	// 		categories << QDateTime::fromMSecsSinceEpoch(set->timestamp()).toString("dd");
-	// 	}
-	// }
+	/*
+									 ****
+		std::string company_ticker = AAPL.json; 
+	*/
+	std::vector<TimeSeries> ohlc = std::move(p.ReadTimeSeries("fl1.json"));
+	
+	for (auto& item : ohlc)
+	{
+		QCandlestickSet *set = new QCandlestickSet(item.timestamp);
+		candlestickSet->setOpen(item.open);
+		candlestickSet->setHigh(item.high);
+		candlestickSet->setLow(item.low);
+		candlestickSet->setClose(item.close);
+
+		if (set) 
+		{
+			Series->append(set);
+			categories << QDateTime::fromMSecsSinceEpoch(set->timestamp()).toString("dd");
+		}
+	}
 
 	// chart
 	auto chart = new QChart;
@@ -40,7 +52,7 @@ Review::Review()
 	chart->createDefaultAxes();
 
 	auto axisX = qobject_cast<QBarCategoryAxis*>(chart->axes(Qt::Horizontal).at(0));
-	// axisX->setCategories(categories);
+	axisX->setCategories(categories);
 
 	auto axisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).at(0));
 	axisY->setMax(axisY->max() * 1.01);
