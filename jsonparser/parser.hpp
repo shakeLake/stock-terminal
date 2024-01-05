@@ -3,7 +3,6 @@
 
 #include "newsclass.hpp"
 #include "timeseries.hpp"
-#include <iomanip>
 
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
@@ -13,6 +12,7 @@
 #include <array>
 #include <fstream>
 #include <sstream>
+#include <iomanip>
 
 using namespace boost::property_tree;
 

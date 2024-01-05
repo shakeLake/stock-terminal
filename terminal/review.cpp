@@ -20,8 +20,6 @@ Review::Review()
 	Series->setIncreasingColor(QColor(Qt::green));
 	Series->setDecreasingColor(QColor(Qt::red));
 
-	QStringList categories;
-
 	/*
 									 ****
 		std::string company_ticker = AAPL.json; 
@@ -29,20 +27,17 @@ Review::Review()
 	JsonParser p;
 	std::vector<TimeSeries> ohlc = std::move(p.ReadTimeSeries("fl1.json"));
 	
-	for (auto& item : ohlc)
+	QStringList categories;
+	for (auto item = ohlc.end() - 1; item != ohlc.begin(); --item)
 	{
-		std::cout << item.timestamp << std::endl;
-		QCandlestickSet *set = new QCandlestickSet((int)item.timestamp);
-		set->setOpen(item.open);
-		set->setHigh(item.high);
-		set->setLow(item.low);
-		set->setClose(item.close);
+		QCandlestickSet* set = new QCandlestickSet(item->timestamp);
+		set->setOpen(item->open);
+		set->setHigh(item->high);
+		set->setLow(item->low);
+		set->setClose(item->close);
 
-		if (set) 
-		{
-			Series->append(set);
-			categories << QDateTime::fromMSecsSinceEpoch(set->timestamp()).toString("dd");
-		}
+		Series->append(set);
+		categories << QDateTime::fromSecsSinceEpoch(set->timestamp()).toString("dd");
 	}
 
 	// chart
@@ -62,8 +57,6 @@ Review::Review()
 
 	chart->legend()->setVisible(true);
 	chart->legend()->setAlignment(Qt::AlignBottom);
-
-	// createDefaultChartView(chart);
 
 	QChartView* chartView = new QChartView(chart);
 	layout->addWidget(chartView);
