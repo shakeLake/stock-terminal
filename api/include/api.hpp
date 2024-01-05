@@ -7,25 +7,34 @@ class APICall
 {
 private:
 	std::string apiKey;
+	std::string target;
+	std::string command;
 
 public:
-	APICall(std::string /*api*/);
+	// Core Stock API
+	// std::string TIME_SERIES_INTRADAY(std::string /*symbol*/, 
+	// 								  std::string /*interval*/);
 
-	APICall() = delete;
-	~APICall() = default;
+	// cryptocurrencies
+	// std::string CURRENCY_EXCHANGE_RATE(std::string /* first */, 
+	// 								   std::string /* second */);
 
 	// Core Stock API
-	std::string TIME_SERIES_INTRADAY(std::string /*symbol*/, 
-									  std::string /*interval*/);
-
 	std::string TIME_SERIES_DAILY(std::string /*symbol*/);
 
 	// Alpha Intelligence
 	std::string NEWS_SENTIMENT(std::string /*ticker*/);
 
-	// cryptocurrencies
-	std::string CURRENCY_EXCHANGE_RATE(std::string /* first */, 
-									   std::string /* second */);
+public:
+	APICall(std::string /* api key */,
+			std::string /* ticker */,
+			std::string& /* command */);
+
+	APICall() = delete;
+	~APICall() = default;
+
+	std::string GetTicker();
+	std::string GetTargetName();
 
 };
 

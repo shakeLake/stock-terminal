@@ -2,7 +2,8 @@
 
 int main()
 {
-	Client cli;
+	using GET = Client;
+	GET cli("AAPL", "TIME_SERIES_DAILY");
 
 	return 0;
 }

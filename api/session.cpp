@@ -11,7 +11,14 @@ Session::Session(net::any_io_executor ex,
 
 	req_.version(11);
 	req_.method(http::verb::get);
-	req_.target(api_call->NEWS_SENTIMENT("IBM"));
+
+	if (api_call->GetTargetName() == "NEWS_SENTIMENT")
+		req_.target(api_call->NEWS_SENTIMENT(api_call->GetTicker()));
+	else if (api_call->GetTargetName() == "TIME_SERIES_DAILY")
+		req_.target(api_call->TIME_SERIES_DAILY(api_call->GetTicker()));
+	else
+		std::cerr << "Target Error" << '\n';
+
 	req_.set(http::field::host, host);
 	req_.set(http::field::user_agent, BOOST_BEAST_VERSION_STRING);
 }

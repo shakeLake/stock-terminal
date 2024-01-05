@@ -15,7 +15,8 @@ private:
 	APICall* api;
 
 public:
-	Client();
+	Client(std::string /* ticker */,
+			std::string /* command */);
 	~Client();
 
 };
