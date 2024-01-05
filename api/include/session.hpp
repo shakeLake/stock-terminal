@@ -6,7 +6,9 @@
 #include <boost/beast/ssl.hpp>
 #include <boost/beast/version.hpp>
 #include <boost/asio/strand.hpp>
+
 #include <iostream>
+#include <fstream>
 
 #include "api.hpp"
 
@@ -46,6 +48,8 @@ private:
 				std::size_t /*bytes transferred*/);
 
 	void OnShutdown(beast::error_code);
+
+	void WriteData();
 
 public:
 	Session(net::any_io_executor /*io*/,

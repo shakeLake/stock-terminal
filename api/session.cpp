@@ -112,6 +112,15 @@ void Session::OnWrite(beast::error_code ec,
 					));
 }
 
+void Session::WriteData()
+{
+	std::string name = api_call->GetTargetName() + "_" + api_call->GetTicker() + ".json";						
+
+	std::ofstream out(name);
+	out << res_.body();
+	out.close();
+}
+
 void Session::OnRead(beast::error_code ec, 
 					 std::size_t bytes_transfered)
 {
@@ -123,7 +132,7 @@ void Session::OnRead(beast::error_code ec,
 		return;
 	}
 
-	std::cout << res_.body() << std::endl;
+	WriteData();
 
 	stream_.async_shutdown(beast::bind_front_handler(
 								&Session::OnShutdown,
