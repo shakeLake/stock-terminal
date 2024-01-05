@@ -3,7 +3,8 @@
 UserInterface::UserInterface()
 {
 	setWindowTitle("Terminal");
-	setWindowState(Qt::WindowMaximized);
+	showFullScreen();
+	showMaximized();
 
 	setStyleSheet("background-color: #17232D");
 

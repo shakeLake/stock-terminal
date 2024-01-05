@@ -15,10 +15,11 @@ NewsFeed::NewsFeed()
 
 	GetScrollArea();
 
-	std::string titl = "Apple Is Far Less Important to Berkshire Hathaway Than You Think";
-	std::string desc = "What is Warren Buffett-led Berkshire Hathaway really worth?";
-	std::string url = "http://example.com/";
-	// NewNewsBlock(titl, desc, url);
+	JsonParser p;
+    std::vector<NewsItem> news = std::move(p.ReadNews("fl.json"));
+
+	for (int i = 0; i < news.size(); ++i)
+		NewNewsBlock(news[i].title, news[i].summary, news[i].url);
 }
 
 QDockWidget* NewsFeed::operator()()

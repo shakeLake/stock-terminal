@@ -13,4 +13,4 @@ endif()
 
 add_subdirectory("examples" "examples-build")
 
-# add_subdirectory("terminal" "terminal-build")
+add_subdirectory("terminal" "terminal-build")

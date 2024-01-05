@@ -9,7 +9,7 @@ int main(int argc, char** argv)
 	QFont font("Helvetica");
 	QApplication::setFont(font);
 
-	UserInterface ui();
+	UserInterface ui;
 	ui.show();
 
 	return app.exec();
