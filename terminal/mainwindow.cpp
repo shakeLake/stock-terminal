@@ -1,9 +1,9 @@
 #include "include/mainwindow.hpp"
 
-UserInterface::UserInterface(int height, int width)
+UserInterface::UserInterface()
 {
 	setWindowTitle("Terminal");
-	resize(width, height);
+	setWindowState(Qt::WindowMaximized);
 
 	setStyleSheet("background-color: #17232D");
 
