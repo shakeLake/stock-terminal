@@ -58,15 +58,13 @@ void NewsFeed::NewNewsBlock(std::string& title, std::string& description, std::s
 
 	QLabel* titl = new QLabel();
 	titl->setText(qtitle);
+	titl->setWordWrap(true);
 	titl->setTextFormat(Qt::RichText);
 	titl->setTextInteractionFlags(Qt::TextBrowserInteraction);
 	titl->setOpenExternalLinks(true);
 
-	// titl->setStyleSheet("font-size: 20px;"
-	//					 "font-weight: bold;"
-	//					 "color: white;");
-
 	QLabel* descrp = new QLabel(QString::fromStdString(description));
+	descrp->setWordWrap(true);
 	descrp->setStyleSheet("font-size: 14px;"
 						  "color: white");
 
@@ -82,7 +80,6 @@ void NewsFeed::NewNewsBlock(std::string& title, std::string& description, std::s
 
 	block_widget->setStyleSheet("background-color: #17232D;"
 								"border-radius: 20px");
-	block_widget->setFixedHeight(100);
 
 	scroll_layout->addWidget(block_widget);
 }

@@ -10,6 +10,8 @@
 #include <QFormLayout>
 #include <QScrollArea>
 
+#include <string>
+
 #include "../../jsonparser/parser.hpp"
 
 class NewsFeed : public QDockWidget
