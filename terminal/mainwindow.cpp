@@ -1,6 +1,6 @@
 #include "include/mainwindow.hpp"
 
-UserInterface::UserInterface()
+UserInterface::UserInterface() : GetReviewMenu("fl1.json")
 {
 	setWindowTitle("Terminal");
 	showFullScreen();

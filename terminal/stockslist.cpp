@@ -44,8 +44,7 @@ void StockList::GetSearchBar()
 							"font-weight: bold");
 							
 	QObject::connect(completer, SIGNAL(activated(const QString&)),
-					this, SLOT(TakeFromLineEdit()),
-					Qt::DirectConnection );
+					this, SLOT(TakeFromLineEdit()));
 
 	main_layout->addWidget(search);
 }

@@ -28,6 +28,10 @@ set(APP_SOURCE
         "include/stockform.hpp"
         completer.cpp
         "include/completer.hpp"
+        crosshair.cpp
+        "include/crosshair.hpp"
+        mychartview.cpp
+        "include/mychartview.hpp"
 )
 
 add_library(app-lib STATIC ${APP_SOURCE})

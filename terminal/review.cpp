@@ -1,6 +1,6 @@
 #include "include/review.hpp"
 
-Review::Review()
+Review::Review(std::string ticker)
 {
 	setFeatures(QDockWidget::NoDockWidgetFeatures);
 
@@ -14,23 +14,40 @@ Review::Review()
 
 	QVBoxLayout* layout = new QVBoxLayout(container);
 
+	rev_ticker = ticker;
+
+	CandleSeriesInit();
+
+	GetOHLC();
+	
+	CandlestickSetInit();
+
+	ChartInit();
+
+	chartView = new MyChartView(chart);
+	layout->addWidget(chartView);
+}
+
+void Review::CandleSeriesInit()
+{
 	// candle
-	QCandlestickSeries* Series = new QCandlestickSeries;
-	Series->setIncreasingColor(QColor(Qt::green));
-	Series->setDecreasingColor(QColor(Qt::red));
-	Series->setBodyOutlineVisible(false);
+	series = new QCandlestickSeries;
+	series->setIncreasingColor(QColor(Qt::green));
+	series->setDecreasingColor(QColor(Qt::red));
+	series->setBodyOutlineVisible(false);
 
 	// show candle data
-	QObject::connect(Series, SIGNAL(hovered(bool, QCandlestickSet*)), this, SLOT(PrintData(bool, QCandlestickSet*)));
+	QObject::connect(series, SIGNAL(hovered(bool, QCandlestickSet*)), this, SLOT(PrintData(bool, QCandlestickSet*)));
+}
 
-	/*
-									 ****
-		std::string company_ticker = AAPL.json; 
-	*/
+void Review::GetOHLC()
+{
 	JsonParser p;
-	std::vector<TimeSeries> ohlc = std::move(p.ReadTimeSeries("fl1.json"));
-	
-	QStringList categories;
+	ohlc = std::move(p.ReadTimeSeries(rev_ticker)); // change to ticker
+}
+
+void Review::CandlestickSetInit()
+{
 	for (auto item = ohlc.end() - 1; item != ohlc.begin(); --item)
 	{
 		QCandlestickSet* set = new QCandlestickSet(item->timestamp);
@@ -39,13 +56,16 @@ Review::Review()
 		set->setLow(item->low);
 		set->setClose(item->close);
 
-		Series->append(set);
+		series->append(set);
 		categories << QDateTime::fromSecsSinceEpoch(set->timestamp()).toString("dd");
 	}
+}
 
+void Review::ChartInit()
+{
 	// chart
-	auto chart = new QChart;
-	chart->addSeries(Series);
+	chart = new QChart;
+	chart->addSeries(series);
 	chart->setAnimationOptions(QChart::SeriesAnimations);
 	chart->setBackgroundBrush(QBrush(QColor("#1E2C38")));
 	chart->setTitleBrush(QBrush(QColor("white")));
@@ -60,9 +80,6 @@ Review::Review()
 	axisY->setMin(axisY->min() * 1.0);
 
 	chart->legend()->setVisible(false);
-
-	QChartView* chartView = new QChartView(chart);
-	layout->addWidget(chartView);
 }
 
 void Review::PrintData(bool status, QCandlestickSet* set)
