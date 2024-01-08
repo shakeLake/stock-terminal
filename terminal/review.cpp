@@ -16,9 +16,12 @@ Review::Review()
 
 	// candle
 	QCandlestickSeries* Series = new QCandlestickSeries;
-	Series->setName("Name");
 	Series->setIncreasingColor(QColor(Qt::green));
 	Series->setDecreasingColor(QColor(Qt::red));
+	Series->setBodyOutlineVisible(false);
+
+	// show candle data
+	QObject::connect(Series, SIGNAL(hovered(bool, QCandlestickSet*)), this, SLOT(PrintData(bool, QCandlestickSet*)));
 
 	/*
 									 ****
@@ -43,8 +46,9 @@ Review::Review()
 	// chart
 	auto chart = new QChart;
 	chart->addSeries(Series);
-	chart->setTitle("Name Test");
 	chart->setAnimationOptions(QChart::SeriesAnimations);
+	chart->setBackgroundBrush(QBrush(QColor("#1E2C38")));
+	chart->setTitleBrush(QBrush(QColor("white")));
 
 	chart->createDefaultAxes();
 
@@ -52,14 +56,20 @@ Review::Review()
 	axisX->setCategories(categories);
 
 	auto axisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).at(0));
-	axisY->setMax(axisY->max() * 1.01);
-	axisY->setMin(axisY->min() * 0.99);
+	axisY->setMax(axisY->max() * 1.0);
+	axisY->setMin(axisY->min() * 1.0);
 
-	chart->legend()->setVisible(true);
-	chart->legend()->setAlignment(Qt::AlignBottom);
+	chart->legend()->setVisible(false);
 
 	QChartView* chartView = new QChartView(chart);
 	layout->addWidget(chartView);
+}
+
+void Review::PrintData(bool status, QCandlestickSet* set)
+{
+	std::cout << set->high() << ' ';
+	std::cout << set->low() << ' ';
+	std::cout << set->open() << '\n';
 }
 
 QDockWidget* Review::operator()()

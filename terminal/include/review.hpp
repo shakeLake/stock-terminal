@@ -18,6 +18,10 @@
 class Review : public QDockWidget
 {
 	Q_OBJECT
+
+private slots:
+	void PrintData(bool, QCandlestickSet*);
+
 public:
 	Review();
 	~Review() = default;

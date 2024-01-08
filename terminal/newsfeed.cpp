@@ -53,7 +53,7 @@ void NewsFeed::NewNewsBlock(std::string& title, std::string& description, std::s
 
 	QString qtitle = "<a href=";
 	qtitle += '\"' + href + '\"';
-	qtitle += " style=\"color: white; font-size: 20px; font-weight: bold\"";
+	qtitle += " style=\"color: white; text-decoration:none; font-size: 20px; font-weight: bold\"";
 	qtitle += '>' + QString::fromStdString(title) + "</a>";
 
 	QLabel* titl = new QLabel();
