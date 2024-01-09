@@ -16,6 +16,23 @@ Review::Review(std::string ticker)
 
 	rev_ticker = ticker;
 
+	ohlcInfo = new QWidget;
+	ohlcLayout = new QVBoxLayout(ohlcInfo);
+
+	ohlcInfo->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint | Qt::FramelessWindowHint);	
+	
+	open = new QLabel();
+	high = new QLabel();
+	low = new QLabel();
+	close = new QLabel();
+
+	ohlcLayout->addWidget(open);
+	ohlcLayout->addWidget(high);
+	ohlcLayout->addWidget(low);
+	ohlcLayout->addWidget(close);
+
+	ohlcInfo->setFixedSize(140, 140);
+
 	CandleSeriesInit();
 
 	GetOHLC();
@@ -76,17 +93,26 @@ void Review::ChartInit()
 	axisX->setCategories(categories);
 
 	auto axisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).at(0));
-	axisY->setMax(axisY->max() * 1.0);
-	axisY->setMin(axisY->min() * 1.0);
+	// axisY->setMax(axisY->max() * 1.01);
+	// axisY->setMin(axisY->min() * 0.99);
+
+	axisX->setGridLineVisible(false);
+	axisY->setGridLineVisible(false);
 
 	chart->legend()->setVisible(false);
 }
 
 void Review::PrintData(bool status, QCandlestickSet* set)
 {
-	std::cout << set->high() << ' ';
-	std::cout << set->low() << ' ';
-	std::cout << set->open() << '\n';
+	QPoint globalCursorPos = QCursor::pos();
+	ohlcInfo->move(globalCursorPos.x() - 180, globalCursorPos.y() - 180);
+
+	ohlcInfo->show();
+
+	open->setText(QString::fromStdString(std::to_string(set->open())));
+	high->setText(QString::fromStdString(std::to_string(set->high())));
+	low->setText(QString::fromStdString(std::to_string(set->low())));
+	close->setText(QString::fromStdString(std::to_string(set->close())));
 }
 
 QDockWidget* Review::operator()()

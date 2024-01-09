@@ -4,6 +4,7 @@
 #include <QDockWidget>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <QLabel>
 
 #include <QChart>
 #include <QChartView>
@@ -29,6 +30,14 @@ private:
 	QChart* chart;
 
 	MyChartView* chartView;
+
+	// ohlc info
+	QWidget* ohlcInfo;
+	QVBoxLayout* ohlcLayout;
+	QLabel* open;
+	QLabel* high;
+	QLabel* low;
+	QLabel* close;
 
 private:
 	void CandleSeriesInit();
