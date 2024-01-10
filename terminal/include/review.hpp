@@ -3,6 +3,7 @@
 
 #include <QDockWidget>
 #include <QVBoxLayout>
+#include <QFormLayout>
 #include <QWidget>
 #include <QLabel>
 
@@ -38,6 +39,16 @@ private:
 	QLabel* high;
 	QLabel* low;
 	QLabel* close;
+
+	QLabel* o;
+	QLabel* h;
+	QLabel* l;
+	QLabel* c;
+
+	QFormLayout* open_value;
+	QFormLayout* high_value;
+	QFormLayout* low_value;
+	QFormLayout* close_value;
 
 private:
 	void CandleSeriesInit();

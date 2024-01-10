@@ -22,16 +22,48 @@ Review::Review(std::string ticker)
 	ohlcInfo->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint | Qt::FramelessWindowHint);	
 	
 	open = new QLabel();
+	o = new QLabel("open: ");
+
+	open_value = new QFormLayout;
+	open_value->addRow(o, open);
+
 	high = new QLabel();
+	h = new QLabel("high:  ");
+
+	high_value = new QFormLayout;
+	high_value->addRow(h, high);
+
 	low = new QLabel();
+	l = new QLabel("low: ");
+
+	low_value = new QFormLayout;
+	low_value->addRow(l, low);
+
 	close = new QLabel();
+	c = new QLabel("close: ");
 
-	ohlcLayout->addWidget(open);
-	ohlcLayout->addWidget(high);
-	ohlcLayout->addWidget(low);
-	ohlcLayout->addWidget(close);
+	close_value = new QFormLayout;
+	low_value->addRow(c, close);
 
-	ohlcInfo->setFixedSize(140, 140);
+	o->setStyleSheet("color: gray; font-size: 14px");
+	open->setStyleSheet("font-weight: bold");
+
+	h->setStyleSheet("color: gray; font-size: 14px");
+	high->setStyleSheet("font-weight: bold");
+
+	l->setStyleSheet("color: gray; font-size: 14px");
+	low->setStyleSheet("font-weight: bold");
+
+	c->setStyleSheet("color: gray; font-size: 14px");
+	close->setStyleSheet("font-weight: bold");
+
+	ohlcLayout->addLayout(open_value);
+	ohlcLayout->addLayout(high_value);
+	ohlcLayout->addLayout(low_value);
+	ohlcLayout->addLayout(close_value);
+
+	ohlcInfo->setFixedSize(140, 100);
+	ohlcInfo->setStyleSheet("background-color: white");
 
 	CandleSeriesInit();
 
@@ -105,14 +137,20 @@ void Review::ChartInit()
 void Review::PrintData(bool status, QCandlestickSet* set)
 {
 	QPoint globalCursorPos = QCursor::pos();
-	ohlcInfo->move(globalCursorPos.x() - 180, globalCursorPos.y() - 180);
+	ohlcInfo->move(globalCursorPos.x() - 170, globalCursorPos.y() - 130);
 
+	ohlcInfo->raise();
 	ohlcInfo->show();
 
-	open->setText(QString::fromStdString(std::to_string(set->open())));
-	high->setText(QString::fromStdString(std::to_string(set->high())));
-	low->setText(QString::fromStdString(std::to_string(set->low())));
-	close->setText(QString::fromStdString(std::to_string(set->close())));
+	QString str_open = QString::number(set->open()) + " $";
+	QString str_high = QString::number(set->high()) + " $";
+	QString str_low = QString::number(set->low()) + " $";
+	QString str_close = QString::number(set->close()) + " $";
+
+	open->setText(str_open);
+	high->setText(str_high);
+	low->setText(str_low);
+	close->setText(str_close);
 }
 
 QDockWidget* Review::operator()()
