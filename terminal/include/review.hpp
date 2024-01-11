@@ -15,6 +15,8 @@
 #include <QCandlestickSet>
 #include <QDateTime>
 
+#include <cmath>
+
 #include "../../jsonparser/parser.hpp"
 #include "mychartview.hpp"
 
@@ -35,26 +37,33 @@ private:
 	// ohlc info
 	QWidget* ohlcInfo;
 	QVBoxLayout* ohlcLayout;
+
+	QLabel* time;
 	QLabel* open;
 	QLabel* high;
 	QLabel* low;
 	QLabel* close;
+	QLabel* change;
 
 	QLabel* o;
 	QLabel* h;
 	QLabel* l;
 	QLabel* c;
+	QLabel* cha;
 
 	QFormLayout* open_value;
 	QFormLayout* high_value;
 	QFormLayout* low_value;
 	QFormLayout* close_value;
+	QFormLayout* change_value;
 
 private:
 	void CandleSeriesInit();
 	void GetOHLC();
 	void CandlestickSetInit();
 	void ChartInit();
+
+	QString EstimateChange(double, double);
 
 private slots:
 	void PrintData(bool, QCandlestickSet*);
