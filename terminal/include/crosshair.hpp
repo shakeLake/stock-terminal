@@ -3,6 +3,7 @@
 
 #include <QChart>
 #include <QGraphicsLineItem>
+#include <QGraphicsTextItem>
 #include <QCursor>
 
 class Crosshair
@@ -10,6 +11,8 @@ class Crosshair
 private:
 	QGraphicsLineItem* x_line;
 	QGraphicsLineItem* y_line;
+	// QGraphicsTextItem* x_text;
+	QGraphicsTextItem* y_text;
 	QChart* chart;
 
 	QCursor cursor;

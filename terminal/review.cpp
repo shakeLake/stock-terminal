@@ -162,15 +162,22 @@ QString Review::EstimateChange(double open, double close)
 {
 	double dchange = close - open;
 
+	bool flag = false;
 	if (dchange < 0)
 		change->setStyleSheet("font-weight: bold; color: #F57282; font-size: 14px;");
 	else 
+	{
 		change->setStyleSheet("font-weight: bold; color: #33C58D; font-size: 14px;");
+		flag = true;
+	}
 
 	dchange /= open;
 	dchange *= 100;
 
 	dchange = std::ceil(dchange * 100.0) / 100.0;
+
+	if (flag)
+		return '+' + QString::number(dchange) + " %";
 
 	return QString::number(dchange) + " %";
 }
@@ -178,7 +185,7 @@ QString Review::EstimateChange(double open, double close)
 void Review::PrintData(bool status, QCandlestickSet* set)
 {
 	QPoint globalCursorPos = QCursor::pos();
-	ohlcInfo->move(globalCursorPos.x() - 165, globalCursorPos.y() - 165);
+	ohlcInfo->move(globalCursorPos.x() - 180, globalCursorPos.y() - 205);
 
 	ohlcInfo->raise();
 	ohlcInfo->show();
