@@ -41,11 +41,6 @@ private:
 	void CandlestickSetInit();
 	void ChartInit();
 
-	QString EstimateChange(double, double);
-
-private slots:
-	void PrintData(bool, QCandlestickSet*);
-
 public:
 	Review(std::string /* ticker */);
 	~Review() = default;

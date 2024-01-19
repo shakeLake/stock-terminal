@@ -13,6 +13,7 @@
 #include <vector>
 
 #include "timeseries.hpp"
+#include "ohlcTable.hpp"
 
 class Crosshair
 {
@@ -26,15 +27,14 @@ private:
 	QCandlestickSeries* series;
 	std::vector<TimeSeries>* seriesVec;
 
-	QCursor cursor;
+	OHLCTable ohlc;
 
-	QWidget* ohlc;
+	QCursor cursor;
 
 public:
 	Crosshair(	QChart*,
 				QCandlestickSeries*,
-				std::vector<TimeSeries>*,
-				QWidget*);
+				std::vector<TimeSeries>*);
 
 	~Crosshair() = default;
 

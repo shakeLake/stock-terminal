@@ -2,10 +2,9 @@
 
 MyChartView::MyChartView(QChart* qchart,
 						 QCandlestickSeries* qseries,
-						 std::vector<TimeSeries>* seriesSet,
-						 QWidget* qohlc) :
+						 std::vector<TimeSeries>* seriesSet) :
 	QChartView(qchart),
-	crosshair(new Crosshair(qchart, qseries, seriesSet, qohlc))
+	crosshair(new Crosshair(qchart, qseries, seriesSet))
 {
 }
 

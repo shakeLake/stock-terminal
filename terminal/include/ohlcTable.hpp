@@ -5,6 +5,9 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QFormLayout>
+#include <QDateTime>
+
+#include "timeseries.hpp"
 
 class OHLCTable
 {
@@ -32,13 +35,14 @@ private:
 	QFormLayout* close_value;
 	QFormLayout* change_value;
 
-private:
+public:
 	void PrintData(TimeSeries);
-    QString EstimateChange(double open, double close)
+    QString EstimateChange(double open, double close);
+    void hide();
 
 public:
     OHLCTable();
-    ~OHLCTable();
+    ~OHLCTable() = default;
 
 };
 

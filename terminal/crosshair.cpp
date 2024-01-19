@@ -2,13 +2,11 @@
 
 Crosshair::Crosshair(QChart* qchart,
                      QCandlestickSeries* qseries,
-                     std::vector<TimeSeries>* seriesSet,
-                     QWidget* qohlc) :
+                     std::vector<TimeSeries>* seriesSet) :
     x_line(new QGraphicsLineItem(qchart)),
     y_line(new QGraphicsLineItem(qchart)),
     x_text(new QGraphicsTextItem(qchart)),
     y_text(new QGraphicsTextItem(qchart)),
-    ohlc(qohlc),
     series(qseries),
     chart(qchart)
 {
@@ -57,6 +55,7 @@ void Crosshair::UpdatePosition(QPointF pos)
         x_text->setPos(pos.x() - x_text->boundingRect().width() / 2.0, chart->plotArea().bottom());
 
         x_text->show();
+        ohlc.PrintData(seriesVec->at((seriesVec->size() - 1) - timeShift));
     }
 
     if (chart->plotArea().contains(pos))
@@ -73,7 +72,7 @@ void Crosshair::UpdatePosition(QPointF pos)
         y_line->hide();
         x_text->hide();
         y_text->hide();
-        ohlc->close(); 
+        ohlc.hide();
         cursor.setShape(Qt::ArrowCursor);
         chart->setCursor(cursor);
     }

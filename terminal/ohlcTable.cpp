@@ -1,4 +1,4 @@
-#include "ohlcTable.hpp"
+#include "include/ohlcTable.hpp"
 
 OHLCTable::OHLCTable()
 {
@@ -84,13 +84,13 @@ void OHLCTable::PrintData(TimeSeries set)
 	ohlcInfo->raise();
 	ohlcInfo->show();
 
-	QString str_open = QString::number(set.open()) + " $";
-	QString str_high = QString::number(set.high()) + " $";
-	QString str_low = QString::number(set.low()) + " $";
-	QString str_close = QString::number(set.close()) + " $";
-	QString str_change = EstimateChange(set.open(), set.close());
+	QString str_open = QString::number(set.open) + " $";
+	QString str_high = QString::number(set.high) + " $";
+	QString str_low = QString::number(set.low) + " $";
+	QString str_close = QString::number(set.close) + " $";
+	QString str_change = EstimateChange(set.open, set.close);
 
-	time->setText(QDateTime::fromSecsSinceEpoch(set.timestamp()).toString("dd MMM yyyy, ddd"));
+	time->setText(QDateTime::fromSecsSinceEpoch(set.timestamp).toString("dd MMM yyyy, ddd"));
 	open->setText(str_open);
 	high->setText(str_high);
 	low->setText(str_low);
@@ -125,4 +125,9 @@ QString OHLCTable::EstimateChange(double open, double close)
 		return '+' + QString::number(dchange) + " %";
 
 	return QString::number(dchange) + " %";
+}
+
+void OHLCTable::hide()
+{
+    ohlcInfo->hide();
 }

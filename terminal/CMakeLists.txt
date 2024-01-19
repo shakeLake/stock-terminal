@@ -35,6 +35,8 @@ set(APP_SOURCE
         rescrollbar.cpp
         "include/rescrollbar.hpp"
         "include/timeseries.hpp"
+        ohlcTable.cpp
+        "include/ohlcTable.hpp"
 )
 
 add_library(app-lib STATIC ${APP_SOURCE})

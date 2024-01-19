@@ -23,8 +23,7 @@ private:
 public:
     MyChartView(QChart*,
                 QCandlestickSeries*,
-                std::vector<TimeSeries>*,
-                QWidget*);
+                std::vector<TimeSeries>*);
 
     ~MyChartView();
 

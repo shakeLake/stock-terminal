@@ -24,7 +24,7 @@ Review::Review(std::string ticker)
 
 	ChartInit();
 
-	chartView = new MyChartView(chart, series, &ohlc, ohlcInfo);
+	chartView = new MyChartView(chart, series, &ohlc);
 	layout->addWidget(chartView);
 }
 
