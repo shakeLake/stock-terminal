@@ -3,6 +3,8 @@
 
 #include <QChartView>
 #include <QChart>
+#include <QWidget>
+#include <QCandlestickSeries>
 
 #include "crosshair.hpp"
 
@@ -11,11 +13,21 @@ class MyChartView : public QChartView
 private:
     Crosshair* crosshair;
 
+    // zoom
+	double mFactor = 1.0;
+
+private:
+    void mouseMoveEvent(QMouseEvent*) override;
+    void wheelEvent(QWheelEvent*) override;
+
 public:
-    MyChartView(QChart*);
+    MyChartView(QChart*,
+                QCandlestickSeries*,
+                std::vector<TimeSeries>*,
+                QWidget*);
+
     ~MyChartView();
 
-    void mouseMoveEvent(QMouseEvent*) override;
 };
 
 #endif /* MYCHARTVIEW_HPP_ */

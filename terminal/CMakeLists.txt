@@ -32,6 +32,9 @@ set(APP_SOURCE
         "include/crosshair.hpp"
         mychartview.cpp
         "include/mychartview.hpp"
+        rescrollbar.cpp
+        "include/rescrollbar.hpp"
+        "include/timeseries.hpp"
 )
 
 add_library(app-lib STATIC ${APP_SOURCE})

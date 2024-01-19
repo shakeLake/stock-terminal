@@ -19,6 +19,7 @@
 
 #include "../../jsonparser/parser.hpp"
 #include "mychartview.hpp"
+#include "rescrollbar.hpp"
 
 class Review : public QDockWidget
 {
@@ -33,29 +34,6 @@ private:
 	QChart* chart;
 
 	MyChartView* chartView;
-
-	// ohlc info
-	QWidget* ohlcInfo;
-	QVBoxLayout* ohlcLayout;
-
-	QLabel* time;
-	QLabel* open;
-	QLabel* high;
-	QLabel* low;
-	QLabel* close;
-	QLabel* change;
-
-	QLabel* o;
-	QLabel* h;
-	QLabel* l;
-	QLabel* c;
-	QLabel* cha;
-
-	QFormLayout* open_value;
-	QFormLayout* high_value;
-	QFormLayout* low_value;
-	QFormLayout* close_value;
-	QFormLayout* change_value;
 
 private:
 	void CandleSeriesInit();
