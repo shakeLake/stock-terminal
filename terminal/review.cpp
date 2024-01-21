@@ -68,14 +68,15 @@ void Review::ChartInit()
 	chart->setTitleBrush(QBrush(QColor("white")));
 	chart->setDropShadowEnabled(false);
 
-	chart->createDefaultAxes();
-
-	auto axisX = qobject_cast<QBarCategoryAxis*>(chart->axes(Qt::Horizontal).at(0));
+	QBarCategoryAxis* axisX = new QBarCategoryAxis();
 	axisX->setCategories(categories);
+	chart->addAxis(axisX, Qt::AlignBottom);
 
-	auto axisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).at(0));
-	// axisY->setMax(axisY->max() * 1.01);
-	// axisY->setMin(axisY->min() * 0.99);
+	QValueAxis* axisY = new QValueAxis;
+	chart->addAxis(axisY, Qt::AlignRight);
+
+	series->attachAxis(axisX);
+	series->attachAxis(axisY);
 
 	axisX->setGridLineColor(QColor("#17232D"));
 	axisY->setGridLineColor(QColor("#17232D"));

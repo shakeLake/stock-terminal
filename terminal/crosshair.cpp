@@ -42,7 +42,7 @@ void Crosshair::UpdatePosition(QPointF pos)
 
     QString yText = QString("%1").arg(chart->mapToValue(pos).y());
     y_text->setHtml(QString("<div style='background-color: #3C5568;'>") + yText + "</div>");
-    y_text->setPos(chart->plotArea().left() / 8.0, pos.y() - y_text->boundingRect().height() / 2.0);
+    y_text->setPos(chart->plotArea().right(), pos.y() - y_text->boundingRect().height() / 2.0);
 
     int timeShift = chart->mapToValue(pos).x() + 0.5;
 
@@ -57,6 +57,8 @@ void Crosshair::UpdatePosition(QPointF pos)
         x_text->show();
         ohlc.PrintData(seriesVec->at((seriesVec->size() - 1) - timeShift));
     }
+    else
+        ohlc.hide();
 
     if (chart->plotArea().contains(pos))
     {
