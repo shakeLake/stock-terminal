@@ -79,3 +79,14 @@ void Crosshair::UpdatePosition(QPointF pos)
         chart->setCursor(cursor);
     }
 }
+
+void Crosshair::HideEverything()
+{
+    x_line->hide();
+    y_line->hide();
+    x_text->hide();
+    y_text->hide();
+    ohlc.hide();
+    cursor.setShape(Qt::ArrowCursor);
+    chart->setCursor(cursor);
+}

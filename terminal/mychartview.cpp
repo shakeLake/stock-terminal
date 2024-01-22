@@ -10,7 +10,11 @@ MyChartView::MyChartView(QChart* qchart,
 
 void MyChartView::mouseMoveEvent(QMouseEvent* event)
 {
-	crosshair->UpdatePosition(event->position());
+	if (isPressed)
+		chart()->scroll((trajectory.x() - event->position().x()),  0);
+	else
+		crosshair->UpdatePosition(event->position());
+
 	QChartView::mouseMoveEvent(event);
 }
 
@@ -27,6 +31,21 @@ void MyChartView::wheelEvent(QWheelEvent* event)
 	chart()->zoomIn(rect);
 
 	QChartView::wheelEvent(event);
+}
+
+void MyChartView::mousePressEvent(QMouseEvent* event)
+{
+	isPressed = true;
+	trajectory = event->position();
+	crosshair->HideEverything();
+
+	QChartView::mousePressEvent(event);
+}
+
+void MyChartView::mouseReleaseEvent(QMouseEvent* event)
+{
+	isPressed = false;
+	QChartView::mouseReleaseEvent(event);
 }
 
 MyChartView::~MyChartView()

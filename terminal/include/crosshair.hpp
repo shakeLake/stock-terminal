@@ -39,6 +39,7 @@ public:
 	~Crosshair() = default;
 
 	void UpdatePosition(QPointF);
+	void HideEverything();
 
 };
 

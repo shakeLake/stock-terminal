@@ -16,9 +16,15 @@ private:
     // zoom
 	double mFactor = 1.0;
 
+    // drag and move
+    bool isPressed = false;
+    QPointF trajectory;
+
 private:
     void mouseMoveEvent(QMouseEvent*) override;
     void wheelEvent(QWheelEvent*) override;
+    void mousePressEvent(QMouseEvent*) override;
+    void mouseReleaseEvent(QMouseEvent*) override;
 
 public:
     MyChartView(QChart*,
