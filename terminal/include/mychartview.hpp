@@ -5,6 +5,7 @@
 #include <QChart>
 #include <QWidget>
 #include <QCandlestickSeries>
+#include <QScrollBar>
 
 #include "crosshair.hpp"
 
