@@ -33,6 +33,9 @@ private:
 	QStringList categories;
 	QChart* chart;
 
+	QBarCategoryAxis* axisX;
+	QValueAxis* axisY;
+
 	MyChartView* chartView;
 
 private:

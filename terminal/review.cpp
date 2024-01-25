@@ -40,12 +40,12 @@ void Review::CandleSeriesInit()
 void Review::GetOHLC()
 {
 	JsonParser p;
-	ohlc = std::move(p.ReadTimeSeries(rev_ticker)); // change to ticker
+	ohlc = std::move(p.ReadTimeSeries(rev_ticker));
 }
 
 void Review::CandlestickSetInit()
 {
-	for (auto item = ohlc.end() - 1; item != ohlc.begin(); --item)
+	for (auto item = ohlc.end(); item != ohlc.begin(); --item)
 	{
 		QCandlestickSet* set = new QCandlestickSet(item->timestamp);
 		set->setOpen(item->open);
@@ -54,7 +54,8 @@ void Review::CandlestickSetInit()
 		set->setClose(item->close);
 
 		series->append(set);
-		categories << QDateTime::fromSecsSinceEpoch(set->timestamp()).toString("dd");
+		categories.push_back(QDateTime::fromSecsSinceEpoch(set->timestamp()).toString("dd MMM yyyy"));
+		qDebug() << QDateTime::fromSecsSinceEpoch(set->timestamp()).toString("dd MMM yyyy");
 	}
 }
 
@@ -68,20 +69,27 @@ void Review::ChartInit()
 	chart->setTitleBrush(QBrush(QColor("white")));
 	chart->setDropShadowEnabled(false);
 
-	QBarCategoryAxis* axisX = new QBarCategoryAxis();
+	axisX = new QBarCategoryAxis();
 	axisX->setCategories(categories);
-	chart->addAxis(axisX, Qt::AlignBottom);
+	axisX->setMin("03 Nov 2023");
+	axisX->setMax("05 Jan 2024");
 
-	QValueAxis* axisY = new QValueAxis;
+	qDebug() << axisX->count();
+	qDebug() << categories.size();
+	qDebug() << ohlc.size();
+
+	axisY = new QValueAxis;
+
+	chart->addAxis(axisX, Qt::AlignBottom);
 	chart->addAxis(axisY, Qt::AlignRight);
 
 	series->attachAxis(axisX);
 	series->attachAxis(axisY);
 
+	chart->legend()->setVisible(false);
+
 	axisX->setGridLineColor(QColor("#17232D"));
 	axisY->setGridLineColor(QColor("#17232D"));
-
-	chart->legend()->setVisible(false);
 }
 
 QDockWidget* Review::operator()()

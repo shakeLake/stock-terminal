@@ -6,6 +6,7 @@ MyChartView::MyChartView(QChart* qchart,
 	QChartView(qchart),
 	crosshair(new Crosshair(qchart, qseries, seriesSet))
 {
+	axisX = qobject_cast<QBarCategoryAxis*>(chart()->axes(Qt::Horizontal).at(0));
 }
 
 void MyChartView::mouseMoveEvent(QMouseEvent* event)
@@ -26,15 +27,21 @@ void MyChartView::mouseMoveEvent(QMouseEvent* event)
 
 void MyChartView::wheelEvent(QWheelEvent* event)
 {
-	chart()->zoomReset();
+	// chart()->zoomReset();
 
-	mFactor *= event->angleDelta().y() > 0 ? 0.5 : 2;
+	// mFactor *= event->angleDelta().y() > 0 ? 0.5 : 2;
 
-	QRectF rect = chart()->plotArea();
-	double r = mapToScene(sceneRect().center().x() * 2, 0).x();
-	rect.setWidth(mFactor * rect.width());
-	rect.moveRight(r);
-	chart()->zoomIn(rect);
+	// QRectF rect = chart()->plotArea();
+	// double r = mapToScene(sceneRect().center().x() * 2, 0).x();
+	// rect.setWidth(mFactor * rect.width());
+	// rect.moveRight(r);
+	// chart()->zoomIn(rect);
+
+	std::string ax = axisX->min().toStdString();
+	int q = (ax[1] - '0') - 1;
+	ax[1] = q + '0'; 
+	qDebug() << ax;
+	axisX->setMax(QString::fromStdString(ax));
 
 	// QChartView::wheelEvent(event);
 }

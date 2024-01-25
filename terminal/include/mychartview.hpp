@@ -6,6 +6,7 @@
 #include <QWidget>
 #include <QCandlestickSeries>
 #include <QScrollBar>
+#include <QBarCategoryAxis>
 
 #include "crosshair.hpp"
 
@@ -20,7 +21,8 @@ private:
     // drag and move
     bool isPressed = false;
     QPointF trajectory;
-
+    QBarCategoryAxis* axisX;
+    
 private:
     void mouseMoveEvent(QMouseEvent*) override;
     void wheelEvent(QWheelEvent*) override;
