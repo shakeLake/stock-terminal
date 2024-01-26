@@ -7,12 +7,16 @@
 #include <QCandlestickSeries>
 #include <QScrollBar>
 #include <QBarCategoryAxis>
+#include <QDateTime>
+#include <QCursor>
 
 #include "crosshair.hpp"
 
 class MyChartView : public QChartView
 {
 private:
+    QCursor cursor;
+
     Crosshair* crosshair;
 
     // zoom
@@ -22,6 +26,13 @@ private:
     bool isPressed = false;
     QPointF trajectory;
     QBarCategoryAxis* axisX;
+
+    // wheel data
+    int wheelMinPoint;
+	std::vector<TimeSeries>* seriesVec;
+
+    // move event
+    int rightMax;
     
 private:
     void mouseMoveEvent(QMouseEvent*) override;

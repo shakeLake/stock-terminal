@@ -87,6 +87,4 @@ void Crosshair::HideEverything()
     x_text->hide();
     y_text->hide();
     ohlc.hide();
-    cursor.setShape(Qt::ArrowCursor);
-    chart->setCursor(cursor);
 }

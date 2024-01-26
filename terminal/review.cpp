@@ -55,7 +55,6 @@ void Review::CandlestickSetInit()
 
 		series->append(set);
 		categories.push_back(QDateTime::fromSecsSinceEpoch(set->timestamp()).toString("dd MMM yyyy"));
-		qDebug() << QDateTime::fromSecsSinceEpoch(set->timestamp()).toString("dd MMM yyyy");
 	}
 }
 
@@ -71,12 +70,6 @@ void Review::ChartInit()
 
 	axisX = new QBarCategoryAxis();
 	axisX->setCategories(categories);
-	axisX->setMin("03 Nov 2023");
-	axisX->setMax("05 Jan 2024");
-
-	qDebug() << axisX->count();
-	qDebug() << categories.size();
-	qDebug() << ohlc.size();
 
 	axisY = new QValueAxis;
 
