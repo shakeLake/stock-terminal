@@ -6,15 +6,17 @@ MyChartView::MyChartView(QChart* qchart,
 	QChartView(qchart),
 	crosshair(new Crosshair(qchart, qseries, seriesSet))
 {
+	setDragMode(QGraphicsView::ScrollHandDrag);
+	setInteractive(false);
+
 	axisX = qobject_cast<QBarCategoryAxis*>(chart()->axes(Qt::Horizontal).at(0));
 	seriesVec = seriesSet;
 
 	rightMax = 0;
 	wheelMinPoint = 30;
 
-	axisX->setMin(QDateTime::fromSecsSinceEpoch(seriesVec->at(wheelMinPoint).timestamp).toString("dd MMM yyyy"));
-	axisX->setMax(QDateTime::fromSecsSinceEpoch(seriesVec->back().timestamp).toString("dd MMM yyyy"));
-
+	axisX->setMin(QDateTime::fromSecsSinceEpoch(seriesVec->at(wheelMinPoint).timestamp).toString("dd\nMMM\nyyyy"));
+	axisX->setMax(QDateTime::fromSecsSinceEpoch(seriesVec->back().timestamp).toString("dd\nMMM\nyyyy"));
 }
 
 void MyChartView::mouseMoveEvent(QMouseEvent* event)
@@ -62,8 +64,6 @@ void MyChartView::mouseMoveEvent(QMouseEvent* event)
 	}
 	else
 		crosshair->UpdatePosition(event->position());
-
-	// QChartView::mouseMoveEvent(event);
 }
 
 void MyChartView::wheelEvent(QWheelEvent* event)
@@ -84,8 +84,6 @@ void MyChartView::wheelEvent(QWheelEvent* event)
 			axisX->setMin(QDateTime::fromSecsSinceEpoch(seriesVec->at(wheelMinPoint).timestamp).toString("dd MMM yyyy"));
 		}
 	}
-
-	// QChartView::wheelEvent(event);
 }
 
 void MyChartView::mousePressEvent(QMouseEvent* event)

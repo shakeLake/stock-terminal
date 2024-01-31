@@ -14,6 +14,7 @@
 #include <QCandlestickSeries>
 #include <QCandlestickSet>
 #include <QDateTime>
+#include <QFont>
 
 #include <cmath>
 

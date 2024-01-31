@@ -70,6 +70,8 @@ void Review::ChartInit()
 
 	axisX = new QBarCategoryAxis();
 	axisX->setCategories(categories);
+	QFont sansFont("Helvetica", 5);
+	axisX->setLabelsFont(sansFont);
 
 	axisY = new QValueAxis;
 
