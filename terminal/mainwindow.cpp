@@ -1,6 +1,6 @@
 #include "include/mainwindow.hpp"
 
-UserInterface::UserInterface() : GetReviewMenu("fl1.json")
+UserInterface::UserInterface()
 {
 	setWindowTitle("Terminal");
 	showFullScreen();
@@ -11,5 +11,5 @@ UserInterface::UserInterface() : GetReviewMenu("fl1.json")
 	addToolBar(GetToolBar());
 	addDockWidget(Qt::LeftDockWidgetArea, GetNewsFeed());
 	addDockWidget(Qt::RightDockWidgetArea, GetReviewMenu());
-	addDockWidget(Qt::RightDockWidgetArea, GetStockList());
+	addDockWidget(Qt::RightDockWidgetArea, GetStockList(&GetReviewMenu, &GetNewsFeed));
 }

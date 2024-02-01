@@ -13,10 +13,21 @@ NewsFeed::NewsFeed()
 	main_widget->setStyleSheet("background-color: #1E2C38");
 	main_layout = new QVBoxLayout(main_widget);
 
+	infoData = new QLabel("No Data");
+	infoData->setStyleSheet("font-size: 48px; color: #152029");
+	infoData->setAlignment(Qt::AlignCenter);
+
+	main_layout->addWidget(infoData);
+}
+
+void NewsFeed::NewsFeedStart(std::string ticker)
+{
+	infoData->setVisible(false);
+
 	GetScrollArea();
 
 	JsonParser p;
-    std::vector<NewsItem> news = std::move(p.ReadNews("fl.json"));
+    std::vector<NewsItem> news = std::move(p.ReadNews(ticker));
 
 	for (int i = 0; i < news.size(); ++i)
 		NewNewsBlock(news[i].title, news[i].summary, news[i].url);

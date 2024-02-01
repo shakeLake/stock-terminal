@@ -22,7 +22,10 @@
 
 #include <unordered_map>
 #include <map>
+#include <queue>
 
+#include "review.hpp"
+#include "newsfeed.hpp"
 #include "completer.hpp"
 
 class StockList : public QDockWidget
@@ -31,6 +34,10 @@ class StockList : public QDockWidget
 private:
 	QWidget* main_widget;
 	QVBoxLayout* main_layout;
+
+	// Main
+	Review* reviewMenu;
+	NewsFeed* newsFeed;
 
 	// search
 	QLineEdit* search;
@@ -51,6 +58,7 @@ private:
 	QWidget* proceed_widget;
 	QHBoxLayout* proceed_layout;
 	QPushButton* proceed;
+	std::queue<std::string> requestsQueue;
 
 private:
 	void GetSearchBar();
@@ -66,7 +74,7 @@ public:
 	StockList();
 	~StockList() = default;
 
-	QDockWidget* operator()();
+	QDockWidget* operator()(Review*, NewsFeed*);
 
 };
 

@@ -27,6 +27,11 @@ class Review : public QDockWidget
 	Q_OBJECT
 
 private:
+	QLabel* infoData;
+
+	QWidget* container;
+	QVBoxLayout* layout;
+
 	std::string rev_ticker;
 
 	QCandlestickSeries* series;
@@ -46,8 +51,10 @@ private:
 	void ChartInit();
 
 public:
-	Review(std::string /* ticker */);
+	Review();
 	~Review() = default;
+
+	void ReviewStart(std::string /*ticker*/);
 
 	QDockWidget* operator()();
 

@@ -6,61 +6,22 @@ MyChartView::MyChartView(QChart* qchart,
 	QChartView(qchart),
 	crosshair(new Crosshair(qchart, qseries, seriesSet))
 {
-	setDragMode(QGraphicsView::ScrollHandDrag);
-	setInteractive(false);
-
 	axisX = qobject_cast<QBarCategoryAxis*>(chart()->axes(Qt::Horizontal).at(0));
 	seriesVec = seriesSet;
 
 	rightMax = 0;
 	wheelMinPoint = 30;
 
-	axisX->setMin(QDateTime::fromSecsSinceEpoch(seriesVec->at(wheelMinPoint).timestamp).toString("dd\nMMM\nyyyy"));
-	axisX->setMax(QDateTime::fromSecsSinceEpoch(seriesVec->back().timestamp).toString("dd\nMMM\nyyyy"));
+	axisX->setMin(QDateTime::fromSecsSinceEpoch(seriesVec->at(wheelMinPoint).timestamp).toString("dd MMM yyyy"));
+	axisX->setMax(QDateTime::fromSecsSinceEpoch(seriesVec->back().timestamp).toString("dd MMM yyyy"));
 }
 
 void MyChartView::mouseMoveEvent(QMouseEvent* event)
 {
 	if (isPressed)
 	{
-		if (trajectory.x() < event->position().x())
-		{
-			if (wheelMinPoint < seriesVec->size() - 1 && rightMax < seriesVec->size() - 1)
-			{
-				wheelMinPoint += 1; 
-				rightMax += 1;
-
-				if (wheelMinPoint >= 0 
-					|| wheelMinPoint < seriesVec->size() 
-					|| rightMax >= 0 
-					|| rightMax < seriesVec->size())
-				{
-					axisX->setMin(QDateTime::fromSecsSinceEpoch(seriesVec->at(wheelMinPoint).timestamp).toString("dd MMM yyyy"));
-					axisX->setMax(QDateTime::fromSecsSinceEpoch(seriesVec->at(rightMax).timestamp).toString("dd MMM yyyy"));
-				}
-
-				trajectory = event->position();
-			}
-		}
-		else
-		{
-			if (wheelMinPoint > 0 && rightMax > 0)
-			{
-				wheelMinPoint -= 1; 
-				rightMax -= 1;
-
-				if (wheelMinPoint >= 0 
-					|| wheelMinPoint < seriesVec->size() 
-					|| rightMax >= 0 
-					|| rightMax < seriesVec->size())
-				{
-					axisX->setMin(QDateTime::fromSecsSinceEpoch(seriesVec->at(wheelMinPoint).timestamp).toString("dd MMM yyyy"));
-					axisX->setMax(QDateTime::fromSecsSinceEpoch(seriesVec->at(rightMax).timestamp).toString("dd MMM yyyy"));
-				}
-
-				trajectory = event->position();
-			}
-		}
+		chart()->scroll(trajectory.x() - event->position().x(), 0);	
+		trajectory = event->position();
 	}
 	else
 		crosshair->UpdatePosition(event->position());

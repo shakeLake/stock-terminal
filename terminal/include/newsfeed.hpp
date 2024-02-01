@@ -17,6 +17,8 @@
 class NewsFeed : public QDockWidget
 {
 private:
+	QLabel* infoData;
+
 	QWidget* main_widget;
 	QVBoxLayout* main_layout;
 
@@ -32,6 +34,8 @@ private:
 public:
 	NewsFeed();
 	~NewsFeed() = default;
+
+	void NewsFeedStart(std::string /*ticker*/);
 
 	QDockWidget* operator()();
 

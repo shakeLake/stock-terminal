@@ -1,18 +1,29 @@
 #include "include/review.hpp"
 
-Review::Review(std::string ticker)
+Review::Review()
 {
 	setFeatures(QDockWidget::NoDockWidgetFeatures);
 
 	setWindowTitle("Review");				
 	setStyleSheet("QDockWidget {color: #B9CCDB; font-weight: bold; font-size: 12px}");
 
-	QWidget* container = new QWidget;
+	container = new QWidget;
 	setWidget(container);
 
 	container->setStyleSheet("background-color: #1E2C38");
 
-	QVBoxLayout* layout = new QVBoxLayout(container);
+	layout = new QVBoxLayout(container);
+
+	infoData = new QLabel("No Data");
+	infoData->setStyleSheet("font-size: 48px; color: #152029");
+	infoData->setAlignment(Qt::AlignCenter);
+
+	layout->addWidget(infoData);
+}
+
+void Review::ReviewStart(std::string ticker)
+{
+	infoData->setVisible(false);
 
 	rev_ticker = ticker;
 

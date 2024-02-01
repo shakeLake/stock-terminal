@@ -23,8 +23,11 @@ StockList::StockList()
 	GetProceedMenu();
 }
 
-QDockWidget* StockList::operator()()
+QDockWidget* StockList::operator()(Review* review, NewsFeed* news)
 {
+	reviewMenu = review;
+	newsFeed = news;
+
 	return this;
 }
 
@@ -37,11 +40,13 @@ void StockList::GetSearchBar()
 	search->setPlaceholderText(" Search for a ticker (For example: AAPL)");
 	search->setFixedHeight(35);
 
-	search->setStyleSheet("background-color: #243441;"
-							"color: white;"
-							"border-radius: 5px;"
-							"font-size: 14px;"
-							"font-weight: bold");
+	search->setStyleSheet(
+		"background-color: #243441;"
+		"color: white;"
+		"border-radius: 5px;"
+		"font-size: 14px;"
+		"font-weight: bold"
+	);
 							
 	QObject::connect(completer, SIGNAL(activated(const QString&)),
 					 this, SLOT(TakeFromLineEdit()), Qt::QueuedConnection);
@@ -66,16 +71,17 @@ void StockList::GetStockList()
 
 	table->setFrameStyle(QFrame::NoFrame);
 
-	table->setStyleSheet("QHeaderView::section" 
-						"{" 
-							"background-color: transparent;" 
-							"color: #B9CCDB;"
-							"font-weight: bold;"
-						"}"
-						"QTableWidget::item"
-						"{"
-							"background-color: transparent"
-						"}"
+	table->setStyleSheet(
+		"QHeaderView::section" 
+		"{" 
+			"background-color: transparent;" 
+			"color: #B9CCDB;"
+			"font-weight: bold;"
+		"}"
+		"QTableWidget::item"
+		"{"
+			"background-color: transparent"
+		"}"
 	);
 
 	ctable_name << "Ticker" << "Open" << "High" << "Low" << "Close" << "Volume"; 
@@ -110,24 +116,27 @@ QWidget* StockList::StockCheckBox(std::string stock_name)
 	icon->setStyleSheet("border: none");
 
 	QLabel* stock = new QLabel(QString::fromStdString(stock_name));
-	stock->setStyleSheet("font-weight: bold;"
-						 "font-size: 15px;"
-						 "color: white;");
+	stock->setStyleSheet(
+		"font-weight: bold;"
+		"font-size: 15px;"
+		"color: white;"
+	);
 
-	QCheckBox* check_box = new QCheckBox;
-	check_box->setStyleSheet("QCheckBox::indicator:checked"
-							 "{"
-								"image: url(:/Resources/icons/checkbox_checked.png);"
-							 "}"
-							"QCheckBox::indicator:unchecked" 
-							 "{"
-								"image: url(:/Resources/icons/checkbox_unchecked.png);"
-							 "}"
-							 "QCheckBox::indicator"
-							 "{"
-							 	"width: 15px;"
-							 	"height: 15px;"
-							 "}"
+	QCheckBox* check_box = new QCheckBox(stock);
+	check_box->setStyleSheet(
+		"QCheckBox::indicator:checked"
+		"{"
+			"image: url(:/Resources/icons/checkbox_checked.png);"
+		"}"
+		"QCheckBox::indicator:unchecked" 
+		"{"
+			"image: url(:/Resources/icons/checkbox_unchecked.png);"
+		"}"
+		"QCheckBox::indicator"
+		"{"
+			"width: 15px;"
+			"height: 15px;"
+		"}"
 	);
 
 	checkbox_layout->addWidget(check_box);
@@ -142,12 +151,19 @@ void StockList::GetProceedMenu()
 	proceed_widget = new QWidget;
 	proceed_layout = new QHBoxLayout(proceed_widget);  
 
+	proceed_widget->setStyleSheet(
+		"background-color: #243441;"
+		"border-radius: 5px;"
+	);
+
 	proceed = new QPushButton("Request");
 	proceed->setFixedWidth(150);
 	proceed->setFixedHeight(23);
-	proceed->setStyleSheet("background-color: #3374E9;"
-							"color: white;"
-							"border-radius: 5px;");
+	proceed->setStyleSheet(
+		"background-color: #3374E9;"
+		"color: white;"
+		"border-radius: 5px;"
+	);
 
 	QLabel* dummy = new QLabel;
 
@@ -186,18 +202,16 @@ void StockList::TakeFromLineEdit()
 
 void StockList::ActivateCheckWidget(int row, int col)
 {
-	if (prev_widget.first != -1)
-		cell_data[prev_widget]->setStyleSheet("background-color: transparent;");
+	if (col == 0)
+	{
+		if (prev_widget.first != -1)
+			cell_data[prev_widget]->setStyleSheet("background-color: transparent;");
 
-	std::pair<int, int> bufp = std::make_pair(row, col);
+		std::pair<int, int> bufp = std::make_pair(row, col);
 
-	QWidget* widg = cell_data[bufp];
-	widg->setStyleSheet("background-color: #273E4E");
+		QWidget* widg = cell_data[bufp];
+		widg->setStyleSheet("background-color: #273E4E");
 
-	/*
-		if checkbox is not checked it shows dialog window
-		"Request the stock info"
-	*/
-
-	prev_widget = bufp;
+		prev_widget = bufp;
+	}
 }
