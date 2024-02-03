@@ -11,6 +11,7 @@ find_package(Qt6 REQUIRED COMPONENTS Gui)
 find_package(Qt6 REQUIRED COMPONENTS Charts)
 
 add_subdirectory("../jsonparser" "jsonparser-build-terminal")
+add_subdirectory("../api" "api-build")
 
 set(APP_SOURCE
         app.cpp
@@ -37,6 +38,8 @@ set(APP_SOURCE
         "include/timeseries.hpp"
         ohlcTable.cpp
         "include/ohlcTable.hpp"
+        savekeydata.cpp
+        "include/savekeydata.hpp"
 )
 
 add_library(app-lib STATIC ${APP_SOURCE})
@@ -45,6 +48,7 @@ target_link_libraries(app-lib PUBLIC Qt6::Core)
 target_link_libraries(app-lib PUBLIC Qt6::Widgets)
 target_link_libraries(app-lib PUBLIC Qt6::Gui)
 target_link_libraries(app-lib PUBLIC Qt6::Charts)
+target_link_libraries(app-lib PUBLIC apicalllib)
 target_link_libraries(app-lib PUBLIC json-parser-lib)
 
 add_executable(Terminal rmap.qrc app.cpp)

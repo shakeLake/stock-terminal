@@ -22,11 +22,14 @@
 
 #include <unordered_map>
 #include <map>
-#include <queue>
 
 #include "review.hpp"
 #include "newsfeed.hpp"
 #include "completer.hpp"
+#include "savekeydata.hpp"
+#include "../../api/include/client.hpp"
+
+using GET = Client;
 
 class StockList : public QDockWidget
 {
@@ -46,6 +49,7 @@ private:
 	int cellPointer = 0;
 
 	// list
+	SaveKeyData localAccess;
 	QWidget* table_widget;
 	QTableWidget* table;
 	QStringList ctable_name;
@@ -54,17 +58,11 @@ private:
 	std::map<std::pair<int , int>, QWidget*> cell_data;
 	std::pair<int, int> prev_widget = std::make_pair(-1, -1);
 
-	// proceed
-	QWidget* proceed_widget;
-	QHBoxLayout* proceed_layout;
-	QPushButton* proceed;
-	std::queue<std::string> requestsQueue;
-
 private:
 	void GetSearchBar();
 	void GetStockList();
 	QWidget* StockCheckBox(std::string);
-	void GetProceedMenu();
+	void ShowPastTickers();
 
 private slots:
 	void TakeFromLineEdit();

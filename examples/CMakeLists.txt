@@ -4,4 +4,4 @@ project(Examples)
 
 add_subdirectory("api_example" "api_example-build")
 
-# add_subdirectory("json_example" "json_example-build")
+add_subdirectory("json_example" "json_example-build")

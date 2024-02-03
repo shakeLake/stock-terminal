@@ -19,8 +19,9 @@ StockList::StockList()
 
 	GetStockList();
 
+	ShowPastTickers();
+
 	main_layout->addSpacing(10);
-	GetProceedMenu();
 }
 
 QDockWidget* StockList::operator()(Review* review, NewsFeed* news)
@@ -29,6 +30,25 @@ QDockWidget* StockList::operator()(Review* review, NewsFeed* news)
 	newsFeed = news;
 
 	return this;
+}
+
+void StockList::ShowPastTickers()
+{
+	for (std::string& line : localAccess.GetTickersList())
+	{
+		table->insertRow( table->rowCount() );
+
+		std::pair<int, int> bufp = std::make_pair(cellPointer, 0);
+		cell_data[bufp] = StockCheckBox(line);
+		table->setCellWidget(cellPointer, 0, cell_data[bufp]);
+
+		QHeaderView* header = table->verticalHeader();
+		header->setDefaultSectionSize(40);
+		header->sectionResizeMode(QHeaderView::Fixed);
+
+		taken[line] = cellPointer;
+		cellPointer += 1;
+	}
 }
 
 void StockList::GetSearchBar()
@@ -122,55 +142,10 @@ QWidget* StockList::StockCheckBox(std::string stock_name)
 		"color: white;"
 	);
 
-	QCheckBox* check_box = new QCheckBox(stock);
-	check_box->setStyleSheet(
-		"QCheckBox::indicator:checked"
-		"{"
-			"image: url(:/Resources/icons/checkbox_checked.png);"
-		"}"
-		"QCheckBox::indicator:unchecked" 
-		"{"
-			"image: url(:/Resources/icons/checkbox_unchecked.png);"
-		"}"
-		"QCheckBox::indicator"
-		"{"
-			"width: 15px;"
-			"height: 15px;"
-		"}"
-	);
-
-	checkbox_layout->addWidget(check_box);
 	checkbox_layout->addWidget(icon);
 	checkbox_layout->addWidget(stock);
 
 	return checkbox_widget;
-}
-
-void StockList::GetProceedMenu()
-{
-	proceed_widget = new QWidget;
-	proceed_layout = new QHBoxLayout(proceed_widget);  
-
-	proceed_widget->setStyleSheet(
-		"background-color: #243441;"
-		"border-radius: 5px;"
-	);
-
-	proceed = new QPushButton("Request");
-	proceed->setFixedWidth(150);
-	proceed->setFixedHeight(23);
-	proceed->setStyleSheet(
-		"background-color: #3374E9;"
-		"color: white;"
-		"border-radius: 5px;"
-	);
-
-	QLabel* dummy = new QLabel;
-
-	proceed_layout->addWidget(dummy, Qt::AlignRight);
-	proceed_layout->addWidget(proceed, Qt::AlignRight);
-
-	main_layout->addWidget(proceed_widget);
 }
 
 void StockList::TakeFromLineEdit()
@@ -197,6 +172,11 @@ void StockList::TakeFromLineEdit()
 
 		taken[line] = cellPointer;
 		cellPointer += 1;
+
+		localAccess.MarkTickerAsLocalAccessible(line);
+
+		GET requestNEWS(line, "NEWS_SENTIMENT");
+		GET reqOHLC(line, "TIME_SERIES_DAILY");
 	}
 }
 

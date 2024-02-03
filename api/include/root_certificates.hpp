@@ -40,7 +40,7 @@
 
 namespace ssl = boost::asio::ssl; // from <boost/asio/ssl.hpp>
 
-namespace detail {
+namespace root_certificates_detail {
 
 inline
 void
@@ -3939,7 +3939,7 @@ load_root_certificates(ssl::context& ctx, boost::system::error_code& ec)
         return;
 }
 
-} // detail
+} // root_certificates_detail
 
 // Load the root certificates into an ssl::context
 
@@ -3947,7 +3947,7 @@ inline
 void
 load_root_certificates(ssl::context& ctx, boost::system::error_code& ec)
 {
-    detail::load_root_certificates(ctx, ec);
+    root_certificates_detail::load_root_certificates(ctx, ec);
 }
 
 inline
@@ -3955,7 +3955,7 @@ void
 load_root_certificates(ssl::context& ctx)
 {
     boost::system::error_code ec;
-    detail::load_root_certificates(ctx, ec);
+    root_certificates_detail::load_root_certificates(ctx, ec);
     if(ec)
         throw boost::system::system_error{ec};
 }
