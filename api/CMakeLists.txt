@@ -19,7 +19,7 @@ set(Boost_USE_STATIC_RUNTIME OFF)
 find_package(Boost REQUIRED)
 
 set(OPENSSL_USE_STATIC_LIBS TRUE)
-find_package(OpenSSL 3 REQUIRED)
+find_package(OpenSSL REQUIRED)
 
 set(API_SOURCE
     api.cpp

@@ -27,7 +27,7 @@ void NewsFeed::NewsFeedStart(std::string ticker)
 	GetScrollArea();
 
 	JsonParser p;
-    std::vector<NewsItem> news = std::move(p.ReadNews(ticker));
+    std::vector<NewsItem> news = std::move(p.ReadNews("NEWS_SENTIMENT_" + ticker + ".json"));
 
 	for (int i = 0; i < news.size(); ++i)
 		NewNewsBlock(news[i].title, news[i].summary, news[i].url);

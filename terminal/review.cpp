@@ -25,7 +25,8 @@ void Review::ReviewStart(std::string ticker)
 {
 	infoData->setVisible(false);
 
-	rev_ticker = ticker;
+	rev_ticker = "TIME_SERIES_DAILY_";
+	rev_ticker += ticker + ".json";
 
 	CandleSeriesInit();
 

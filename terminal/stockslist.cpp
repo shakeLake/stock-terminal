@@ -47,6 +47,7 @@ void StockList::ShowPastTickers()
 		header->sectionResizeMode(QHeaderView::Fixed);
 
 		taken[line] = cellPointer;
+		tableCellToTicker[cellPointer] = line;
 		cellPointer += 1;
 	}
 }
@@ -171,12 +172,13 @@ void StockList::TakeFromLineEdit()
 		header->sectionResizeMode(QHeaderView::Fixed);
 
 		taken[line] = cellPointer;
+		tableCellToTicker[cellPointer] = line;
 		cellPointer += 1;
 
 		localAccess.MarkTickerAsLocalAccessible(line);
 
-		GET requestNEWS(line, "NEWS_SENTIMENT");
-		GET reqOHLC(line, "TIME_SERIES_DAILY");
+		// GET requestNEWS(line, "NEWS_SENTIMENT");
+		// GET reqOHLC(line, "TIME_SERIES_DAILY");
 	}
 }
 
@@ -193,5 +195,8 @@ void StockList::ActivateCheckWidget(int row, int col)
 		widg->setStyleSheet("background-color: #273E4E");
 
 		prev_widget = bufp;
+
+		reviewMenu->ReviewStart(tableCellToTicker[row]);
+		newsFeed->NewsFeedStart(tableCellToTicker[row]);
 	}
 }

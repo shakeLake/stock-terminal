@@ -46,6 +46,7 @@ private:
 	QLineEdit* search;
 	QCompleter* completer;
 	std::unordered_map<std::string, int> taken;
+	std::unordered_map<int, std::string> tableCellToTicker;
 	int cellPointer = 0;
 
 	// list
