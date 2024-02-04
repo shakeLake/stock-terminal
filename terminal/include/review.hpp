@@ -36,7 +36,7 @@ private:
 
 	QCandlestickSeries* series;
 	std::vector<TimeSeries> ohlc;
-	QStringList categories;
+	QStringList* categories;
 	QChart* chart;
 
 	QBarCategoryAxis* axisX;
@@ -55,6 +55,7 @@ public:
 	~Review() = default;
 
 	void ReviewStart(std::string /*ticker*/);
+	void ReviewReset();
 
 	QDockWidget* operator()();
 

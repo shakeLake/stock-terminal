@@ -28,6 +28,8 @@ void Review::ReviewStart(std::string ticker)
 	rev_ticker = "TIME_SERIES_DAILY_";
 	rev_ticker += ticker + ".json";
 
+	categories = new QStringList;
+
 	CandleSeriesInit();
 
 	GetOHLC();
@@ -38,6 +40,18 @@ void Review::ReviewStart(std::string ticker)
 
 	chartView = new MyChartView(chart, series, &ohlc);
 	layout->addWidget(chartView);
+}
+
+void Review::ReviewReset()
+{
+	layout->removeWidget(chartView);
+
+	delete axisX;
+	delete axisY;
+	delete categories;
+	delete series;
+	delete chart;
+	delete chartView;
 }
 
 void Review::CandleSeriesInit()
@@ -66,7 +80,7 @@ void Review::CandlestickSetInit()
 		set->setClose(item->close);
 
 		series->append(set);
-		categories.push_back(QDateTime::fromSecsSinceEpoch(set->timestamp()).toString("dd MMM yyyy"));
+		categories->push_back(QDateTime::fromSecsSinceEpoch(set->timestamp()).toString("dd MMM yyyy"));
 	}
 }
 
@@ -81,7 +95,7 @@ void Review::ChartInit()
 	chart->setDropShadowEnabled(false);
 
 	axisX = new QBarCategoryAxis();
-	axisX->setCategories(categories);
+	axisX->setCategories(*categories);
 	QFont sansFont("Helvetica", 5);
 	axisX->setLabelsFont(sansFont);
 

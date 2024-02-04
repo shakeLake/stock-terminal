@@ -27,6 +27,9 @@ private:
 	QVBoxLayout* scroll_layout;
 	QScrollArea* scroll_area;
 
+	std::vector<QWidget* >* allQVBoxLayoutWidgets;
+	std::vector<QWidget* >* allQFormLayoutWidgets;
+
 private:
 	void NewNewsBlock(std::string&, std::string&, std::string&);
 	void GetScrollArea();
@@ -36,6 +39,7 @@ public:
 	~NewsFeed() = default;
 
 	void NewsFeedStart(std::string /*ticker*/);
+	void NewsFeedReset();
 
 	QDockWidget* operator()();
 

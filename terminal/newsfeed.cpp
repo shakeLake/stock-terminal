@@ -24,6 +24,9 @@ void NewsFeed::NewsFeedStart(std::string ticker)
 {
 	infoData->setVisible(false);
 
+	allQVBoxLayoutWidgets = new std::vector<QWidget*>();
+	allQFormLayoutWidgets = new std::vector<QWidget*>();
+
 	GetScrollArea();
 
 	JsonParser p;
@@ -31,6 +34,45 @@ void NewsFeed::NewsFeedStart(std::string ticker)
 
 	for (int i = 0; i < news.size(); ++i)
 		NewNewsBlock(news[i].title, news[i].summary, news[i].url);
+}
+
+void NewsFeed::NewsFeedReset()
+{
+	main_layout->removeWidget(scroll_area);
+
+	QLayoutItem* item;
+
+	for (QWidget* var : *allQVBoxLayoutWidgets)
+	{
+		while (( item = var->layout()->takeAt( 0 ) ) != nullptr)
+		{
+			delete item->widget();
+			delete item;
+		}
+
+		delete var;
+	}
+
+	for (QWidget* var : *allQFormLayoutWidgets)
+	{
+		item = var->layout()->takeAt(0);
+
+		delete item->widget();
+		delete item;
+
+		delete var;
+	}
+
+	while (( item = scroll_layout->takeAt( 0 ) ) != nullptr)
+	{
+		delete item->widget();
+		delete item;
+	}
+
+	delete scroll_widget;
+
+	delete allQVBoxLayoutWidgets;
+	delete allQFormLayoutWidgets;
 }
 
 QDockWidget* NewsFeed::operator()()
@@ -93,4 +135,7 @@ void NewsFeed::NewNewsBlock(std::string& title, std::string& description, std::s
 								"border-radius: 20px");
 
 	scroll_layout->addWidget(block_widget);
+
+	allQVBoxLayoutWidgets->push_back(td_widget);
+	allQFormLayoutWidgets->push_back(block_widget);
 }
