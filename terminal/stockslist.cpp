@@ -189,7 +189,7 @@ void StockList::ActivateCheckWidget(int row, int col)
 		if (prev_widget.first != -1)
 		{
 			cell_data[prev_widget]->setStyleSheet("background-color: transparent;");
-			// reviewMenu->ReviewReset();
+			reviewMenu->ReviewReset();
 			newsFeed->NewsFeedReset();
 		}
 
@@ -200,7 +200,7 @@ void StockList::ActivateCheckWidget(int row, int col)
 
 		prev_widget = bufp;
 
-		// reviewMenu->ReviewStart(tableCellToTicker[row]);
+		reviewMenu->ReviewStart(tableCellToTicker[row]);
 		newsFeed->NewsFeedStart(tableCellToTicker[row]);
 	}
 }
