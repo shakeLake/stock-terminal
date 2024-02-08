@@ -38,6 +38,15 @@ std::string APICall::NEWS_SENTIMENT(std::string ticker)
 	return target;
 }
 
+std::string APICall::STOCK_PRICE(std::string ticker)
+{
+	std::string target = "/api/quote/watchlist?symbol="
+						 + ticker
+						 + R"(%7cstocks&symbol=ndx%7cindex&symbol=comp%7cindex&type=Rv)";
+
+	return target;
+}
+
 // std::string APICall::TIME_SERIES_INTRADAY(std::string symbol, 
 // 										  std::string interval)
 // {

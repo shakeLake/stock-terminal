@@ -25,6 +25,9 @@ public:
 	// Alpha Intelligence
 	std::string NEWS_SENTIMENT(std::string /*ticker*/);
 
+	// Stock Price
+	std::string STOCK_PRICE(std::string /*ticker*/);
+
 public:
 	APICall(std::string /* api key */,
 			std::string /* ticker */,

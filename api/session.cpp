@@ -16,6 +16,11 @@ Session::Session(net::any_io_executor ex,
 		req_.target(api_call->NEWS_SENTIMENT(api_call->GetTicker()));
 	else if (api_call->GetTargetName() == "TIME_SERIES_DAILY")
 		req_.target(api_call->TIME_SERIES_DAILY(api_call->GetTicker()));
+	else if (api_call->GetTargetName() == "STOCK_PRICE")
+	{
+		req_.target(api_call->STOCK_PRICE(api_call->GetTicker()));
+		host = "api.nasdaq.com";
+	}
 	else
 		std::cerr << "Target Error" << '\n';
 
@@ -114,10 +119,22 @@ void Session::OnWrite(beast::error_code ec,
 
 void Session::WriteData()
 {
-	std::string name = api_call->GetTargetName() + "_" + api_call->GetTicker() + ".json";						
+	std::string name;
+	std::ofstream out;
 
-	std::ofstream out(name);
-	out << res_.body();
+	if (api_call->GetTargetName() == "STOCK_PRICE")
+	{
+		name = "prices";
+		out.open(name, std::ios_base::app);
+		out << res_.body();
+	}
+	else
+	{
+		name = api_call->GetTargetName() + "_" + api_call->GetTicker() + ".json";						
+		out.open(name);
+		out << res_.body();
+	}
+
 	out.close();
 }
 

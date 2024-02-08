@@ -6,27 +6,27 @@
 class TimeSeries
 {
 public:
-    double timestamp;
-    double open;
-    double high;
-    double low;
-    double close;
-    double volume;
+	double timestamp;
+	double open;
+	double high;
+	double low;
+	double close;
+	double volume;
 
 public:
-    TimeSeries() = default;
+	TimeSeries() = default;
 
-    TimeSeries(const TimeSeries& t)
-    {
-        timestamp = t.timestamp;
-        open = t.open; 
-        high = t.high;
-        low = t.low;
-        close = t.close;
-        volume = t.volume;
-    }
+	TimeSeries(const TimeSeries& t)
+	{
+		timestamp = t.timestamp;
+		open = t.open; 
+		high = t.high;
+		low = t.low;
+		close = t.close;
+		volume = t.volume;
+	}
 
-    ~TimeSeries() = default;
+	~TimeSeries() = default;
 
 };
 
