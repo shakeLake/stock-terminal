@@ -36,12 +36,10 @@ double JsonParser::ReadPrice(std::string path)
 
 	json_parser::read_json(buffer, pt);
 
-	double lastSale = -1;
-	for (auto& mainItem : pt.get_child("data"))
-		for (auto& item : mainItem.second.get_child("rows"))
-			lastSale = item.second.get<double>("lastSale");
+	std::string price = pt.get<std::string>("data.rows..lastSale");
+	price.erase(0, 1);
 
-	return lastSale;
+	return stod(price);
 }
 
 auto GetTimeStamp = [](std::string time) -> double

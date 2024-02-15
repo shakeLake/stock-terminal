@@ -3,7 +3,7 @@
 int main()
 {
 	using GET = Client;
-	GET cli("AAPL", "NEWS_SENTIMENT");
+	GET cli("AAPL", "STOCK_PRICE");
 
 	return 0;
 }
