@@ -19,7 +19,7 @@ Session::Session(net::any_io_executor ex,
 	else if (api_call->GetTargetName() == "STOCK_PRICE")
 	{
 		req_.target(api_call->STOCK_PRICE(api_call->GetTicker()));
-		host = "api.nasdaq.com";
+		host = "query1.finance.yahoo.com";
 	}
 	else
 		std::cerr << "Target Error" << '\n';
@@ -39,7 +39,6 @@ void Session::Run()
 		std::cerr << ec.message() << '\n';		
 		return;
 	}
-
 
 	resolver_.async_resolve(host,
 							port,
@@ -90,7 +89,7 @@ void Session::OnHandshake(beast::error_code ec)
 		return;
 	}
 
-	beast::get_lowest_layer(stream_).expires_after(std::chrono::seconds(30));
+	beast::get_lowest_layer(stream_).expires_after(std::chrono::seconds(5));
 
 	http::async_write(stream_, req_, 
 						beast::bind_front_handler(

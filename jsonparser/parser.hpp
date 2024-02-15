@@ -28,7 +28,7 @@ public:
 
     std::vector<NewsItem> ReadNews(std::string);
     std::vector<TimeSeries> ReadTimeSeries(std::string);
-    double ReadPrice(std::string);
+    std::string ReadPrice(std::string);
 
 };
 

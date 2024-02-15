@@ -40,9 +40,9 @@ std::string APICall::NEWS_SENTIMENT(std::string ticker)
 
 std::string APICall::STOCK_PRICE(std::string ticker)
 {
-	std::string target = "/api/quote/watchlist?symbol="
+	std::string target = "/v8/finance/chart/"
 						 + ticker
-						 + R"(%7cstocks&symbol=ndx%7cindex&symbol=comp%7cindex&type=Rv)";
+						 + R"(?region=US&lang=en-US&includePrePost=false&interval=2m&useYfid=true&range=1d&corsDomain=finance.yahoo.com&.tsrc=finance)";
 
 	return target;
 }
