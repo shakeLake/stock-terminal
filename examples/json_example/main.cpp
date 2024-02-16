@@ -27,7 +27,7 @@ int main()
 	// }
 
 	std::cout << "Test" << std::endl;
-	double price = p.ReadPrice("fl1.json");
+	std::string price = p.ReadPrice("fl1.json");
 	std::cout << "Parser: " << price << std::endl;
 
 	return 0;

@@ -45,17 +45,18 @@
 		
 		<file>Resources/logo/AAPL.png</file>
 		<file>Resources/logo/AMZN.png</file>
-		<file>Resources/logo/Brent.png</file>
-		<file>Resources/logo/BTC.png</file>
-		<file>Resources/logo/GOLD.png</file>
 		<file>Resources/logo/GOOG.png</file>
 		<file>Resources/logo/META.png</file>
 		<file>Resources/logo/MSFT.png</file>
-		<file>Resources/logo/Nasdaq.png</file>
 		<file>Resources/logo/NVIDIA.png</file>
-		<file>Resources/logo/SPX.png</file>
 		<file>Resources/logo/TSLA.png</file>
 		<file>Resources/logo/site.png</file>
+		<file>Resources/logo/AMD.png</file>
+		<file>Resources/logo/NFLX.png</file>
+		<file>Resources/logo/INTC.png</file>
+		<file>Resources/logo/COIN.png</file>
+		<file>Resources/logo/ARM.png</file>
+		<file>Resources/logo/KO.png</file>
 
 		<file>Resources/listing.txt</file>
 

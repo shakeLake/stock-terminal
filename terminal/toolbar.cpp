@@ -8,57 +8,46 @@ ToolBar::ToolBar()
 	addWidget(main_widget);
 
 	main_layout = new QHBoxLayout(main_widget);
+	main_layout->setSpacing(40);
 
-	stuff["GOLD"]   = new QLabel("-1");
 	stuff["AAPL"]   = new QLabel("-1");
-	stuff["SPX"]    = new QLabel("-1");
-	stuff["Nasdaq"] = new QLabel("-1");
 	stuff["NVIDIA"] = new QLabel("-1"); 
 	stuff["AMZN"]   = new QLabel("-1"); 
 	stuff["TSLA"]   = new QLabel("-1"); 
 	stuff["GOOG"]   = new QLabel("-1"); 
-	stuff["BTC"]	= new QLabel("-1");
 	stuff["MSFT"]   = new QLabel("-1");
 	stuff["META"]   = new QLabel("-1");
-	stuff["Brent"]  = new QLabel("-1");
+	stuff["AMD"]   = new QLabel("-1"); 
+	stuff["NFLX"]   = new QLabel("-1"); 
+	stuff["INTC"]   = new QLabel("-1");
+	stuff["COIN"]   = new QLabel("-1");
+	stuff["ARM"]   = new QLabel("-1");
+	stuff["KO"]   = new QLabel("-1");
 
 	// Call this first
 	// UpdatePrice();
 
-	main_layout->addWidget(GetTicker("GOLD"));
-	main_layout->addWidget(new QLabel("  "));
-
 	main_layout->addWidget(GetTicker("AAPL"));
-	main_layout->addWidget(new QLabel("  "));
-
-	main_layout->addWidget(GetTicker("SPX"));
-	main_layout->addWidget(new QLabel("  "));
-
-	main_layout->addWidget(GetTicker("Nasdaq"));
-	main_layout->addWidget(new QLabel("  "));
-
 	main_layout->addWidget(GetTicker("NVIDIA"));
-	main_layout->addWidget(new QLabel("  "));
-
 	main_layout->addWidget(GetTicker("AMZN"));
-	main_layout->addWidget(new QLabel("  "));
-
 	main_layout->addWidget(GetTicker("TSLA"));
-	main_layout->addWidget(new QLabel("  "));
-
 	main_layout->addWidget(GetTicker("GOOG"));
-	main_layout->addWidget(new QLabel("  "));
-
-	main_layout->addWidget(GetTicker("BTC"));
-	main_layout->addWidget(new QLabel("  "));
-
 	main_layout->addWidget(GetTicker("MSFT"));
-	main_layout->addWidget(new QLabel("  "));
-
 	main_layout->addWidget(GetTicker("META"));
-	main_layout->addWidget(new QLabel("  "));
+	main_layout->addWidget(GetTicker("AMD"));
+	main_layout->addWidget(GetTicker("NFLX"));
+	main_layout->addWidget(GetTicker("INTC"));
+	main_layout->addWidget(GetTicker("COIN"));
+	main_layout->addWidget(GetTicker("ARM"));
+	main_layout->addWidget(GetTicker("KO"));
 
-	main_layout->addWidget(GetTicker("Brent"));
+	QPropertyAnimation *animation = new QPropertyAnimation(main_widget, "pos");
+    animation->setDuration(10000);
+
+    animation->setStartValue(QPoint(main_widget->x(), main_widget->y()));
+    animation->setEndValue(QPoint(main_widget->x() + 150, main_widget->y()));
+
+    animation->start();
 }
 
 QWidget* ToolBar::GetTicker(std::string ticker)

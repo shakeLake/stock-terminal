@@ -7,6 +7,8 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QIcon>
+
+#include <QPropertyAnimation>
 #include "stockform.hpp"
 
 class ToolBar : public QToolBar

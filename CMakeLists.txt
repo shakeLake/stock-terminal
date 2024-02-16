@@ -11,6 +11,6 @@ if (MSVC)
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MD")
 endif()
 
-add_subdirectory("examples" "examples-build")
+# add_subdirectory("examples" "examples-build")
 
-# add_subdirectory("terminal" "terminal-build")
+add_subdirectory("terminal" "terminal-build")
