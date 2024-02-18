@@ -7,8 +7,13 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QIcon>
-
+#include <QVector>
+#include <QString>
+#include <QFile>
 #include <QPropertyAnimation>
+#include <QScrollArea>
+#include <QScrollBar>
+
 #include "stockform.hpp"
 
 class ToolBar : public QToolBar
@@ -17,17 +22,22 @@ private:
 	// label design
 	StockForm design;
 
-	// GOLD, AAPL, S&P, Nasdaq, NVIDIA, AMZN, TSLA, GOOG, USD/BTC,
-	// MSFT, META, Brent
+	QScrollArea* scrollArea;
 	QHBoxLayout* main_layout;
 	QWidget* main_widget;
 
+	// stock layout
+	QWidget* stockLayoutWidget;
+	QHBoxLayout* stockLayout;
+
 	// tickers
 	std::unordered_map<std::string, QLabel*> stuff;
+	QVector<QString> prices;
 
 private:
+	void AddTickers();
 	QWidget* GetTicker(std::string /* ticker */);
-	void UpdatePrice(std::string /* price */);
+	void UpdatePrice();
 	void GetPrices();
 
 public:
