@@ -28,6 +28,7 @@ private:
 private:
 	QWidget* GetTicker(std::string /* ticker */);
 	void UpdatePrice(std::string /* price */);
+	void GetPrices();
 
 public:
 	ToolBar();

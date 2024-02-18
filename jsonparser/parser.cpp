@@ -26,21 +26,6 @@ std::vector<NewsItem> JsonParser::ReadNews(std::string path)
 	return news;
 }
 
-std::string JsonParser::ReadPrice(std::string path)
-{
-	cin.open(path);
-	buffer << cin.rdbuf();
-	cin.close();
-
-	ptree pt;
-
-	json_parser::read_json(buffer, pt);
-
-	std::string price = pt.get<std::string>("chart.result..meta.regularMarketPrice");
-
-	return price + '\n';
-}
-
 auto GetTimeStamp = [](std::string time) -> double
 					{
 						std::tm t {};

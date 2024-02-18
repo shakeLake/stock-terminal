@@ -86,6 +86,23 @@ QWidget* ToolBar::GetTicker(std::string ticker)
 	return tick;
 }
 
+void ToolBar::GetPrices()
+{
+	GET request("AAPL", "STOCK_PRICE");
+	GET request("NVIDIA", "STOCK_PRICE");
+	GET request("AMZN", "STOCK_PRICE");
+	GET request("TSLA", "STOCK_PRICE");
+	GET request("GOOG", "STOCK_PRICE");
+	GET request("MSFT", "STOCK_PRICE");
+	GET request("META", "STOCK_PRICE");
+	GET request("AMD", "STOCK_PRICE");
+	GET request("NFLX", "STOCK_PRICE");
+	GET request("INTC", "STOCK_PRICE");
+	GET request("COIN", "STOCK_PRICE");
+	GET request("ARM", "STOCK_PRICE");
+	GET request("KO", "STOCK_PRICE");
+}
+
 QToolBar* ToolBar::operator()()
 {
 	return this;

@@ -116,6 +116,24 @@ void Session::OnWrite(beast::error_code ec,
 					));
 }
 
+auto ReadPrice = []()
+{
+	std::stringstream buffer;
+
+	std::ifstream cin;
+	cin.open("BUFFER");
+	buffer << cin.rdbuf();
+	cin.close();
+
+	ptree pt;
+	json_parser::read_json(buffer, pt);
+	std::string price = pt.get<std::string>("chart.result..meta.regularMarketPrice");
+
+	std::ofstream out("prices", std::ifstream::app);
+	out << price + '\n';
+	out.close();
+};
+
 void Session::WriteData()
 {
 	std::string name;
@@ -123,18 +141,20 @@ void Session::WriteData()
 
 	if (api_call->GetTargetName() == "STOCK_PRICE")
 	{
-		name = "prices";
-		out.open(name, std::ios_base::app);
+		name = "BUFFER";
+		out.open(name);
 		out << res_.body();
+		out.close();
+
+		ReadPrice();
 	}
 	else
 	{
 		name = api_call->GetTargetName() + "_" + api_call->GetTicker() + ".json";						
 		out.open(name);
 		out << res_.body();
+		out.close();
 	}
-
-	out.close();
 }
 
 void Session::OnRead(beast::error_code ec, 
