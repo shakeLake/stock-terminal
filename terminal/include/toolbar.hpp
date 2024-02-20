@@ -13,6 +13,7 @@
 #include <QPropertyAnimation>
 #include <QScrollArea>
 #include <QScrollBar>
+#include <QTimer>
 
 #include "stockform.hpp"
 
@@ -34,11 +35,21 @@ private:
 	std::unordered_map<std::string, QLabel*> stuff;
 	QVector<QString> prices;
 
+	// animation
+	QPropertyAnimation* animation;
+	QScrollBar* scrollBar;
+
 private:
+	void StockAnimation();
+
 	void AddTickers();
 	QWidget* GetTicker(std::string /* ticker */);
 	void UpdatePrice();
 	void GetPrices();
+
+private slots:
+	void RestartStockAnimation();
+	void FakeCircle();
 
 public:
 	ToolBar();

@@ -21,22 +21,47 @@ ToolBar::ToolBar()
 	scrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff ); 
 	scrollArea->setWidget(stockLayoutWidget);
 
-	QScrollBar* scrollBar = scrollArea->horizontalScrollBar();
-	QPropertyAnimation *animation = new QPropertyAnimation(scrollBar, "sliderPosition");
-
-    animation->setStartValue(scrollBar->sliderPosition());
-    animation->setEndValue(scrollBar->sliderPosition() + 10);
-
-    animation->start(QAbstractAnimation::DeleteWhenStopped);
-
 	main_layout->addWidget(scrollArea);
+
+	scrollBar = scrollArea->horizontalScrollBar();
+	animation = new QPropertyAnimation(stockLayoutWidget, "pos");
+
+	StockAnimation();
+}
+
+void ToolBar::StockAnimation()
+{
+	// animation->setLoopCount(-1);
+	animation->setDuration(10000);
+    animation->setStartValue(QPoint(stockLayoutWidget->x(), stockLayoutWidget->y()));
+    animation->setEndValue(QPoint(stockLayoutWidget->x() - 300, stockLayoutWidget->y()));
+
+    animation->start();
+
+	connect(animation, &QPropertyAnimation::finished, this, &ToolBar::RestartStockAnimation);
+}
+
+void ToolBar::FakeCircle()
+{
+	stockLayout->addWidget(GetTicker("AAPL"));
+
+	QLayoutItem* child = stockLayout->itemAt(0);
+	stockLayout->removeItem(stockLayout->itemAt(0));
+
+	delete child->widget();
+}
+
+void ToolBar::RestartStockAnimation()
+{
+	FakeCircle();
+	StockAnimation();
 }
 
 void ToolBar::AddTickers()
 {
 	stockLayoutWidget = new QWidget;
 	stockLayout = new QHBoxLayout(stockLayoutWidget);
-	stockLayout->setSpacing(40);
+	stockLayout->setSpacing(30);
 
 	stockLayout->addWidget(GetTicker("AAPL"));
 	stockLayout->addWidget(GetTicker("NVIDIA"));
@@ -74,7 +99,7 @@ QWidget* ToolBar::GetTicker(std::string ticker)
 
 	tick->setStyleSheet("background-color: #273E4E;"
 						"border-radius: 5px;"
-						"height: 20px");
+						"height: 20px;");
 
 	layout->addWidget(tickicon);
 	layout->addWidget(ticker_name);
