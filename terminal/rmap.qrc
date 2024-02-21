@@ -58,6 +58,8 @@
 		<file>Resources/logo/ARM.png</file>
 		<file>Resources/logo/KO.png</file>
 
+		<file>Resources/loading.gif</file>
+
 		<file>Resources/listing.txt</file>
 
 		<file>Resources/icons/checkbox_checked.png</file>

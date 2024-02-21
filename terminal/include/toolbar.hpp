@@ -14,6 +14,8 @@
 #include <QScrollArea>
 #include <QScrollBar>
 #include <QTimer>
+#include <QGraphicsBlurEffect>
+#include <QMovie>
 
 #include "stockform.hpp"
 
@@ -37,10 +39,15 @@ private:
 
 	// animation
 	QPropertyAnimation* animation;
+
+	int startPoint;
+	std::pair<int, bool> endPoint;
+
 	QScrollBar* scrollBar;
 
 private:
 	void StockAnimation();
+	void Loading();
 
 	void AddTickers();
 	QWidget* GetTicker(std::string /* ticker */);
@@ -49,7 +56,6 @@ private:
 
 private slots:
 	void RestartStockAnimation();
-	void FakeCircle();
 
 public:
 	ToolBar();

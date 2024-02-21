@@ -24,36 +24,62 @@ ToolBar::ToolBar()
 	main_layout->addWidget(scrollArea);
 
 	scrollBar = scrollArea->horizontalScrollBar();
-	animation = new QPropertyAnimation(stockLayoutWidget, "pos");
 
+	animation = new QPropertyAnimation(scrollBar, "sliderPosition");
+
+	Loading();
+
+	endPoint = {scrollBar->maximum(), false};
+	startPoint = scrollBar->minimum();
 	StockAnimation();
+}
+
+void ToolBar::Loading()
+{
+	QLabel* lbl = new QLabel();
+	lbl->setFixedSize(100, 100);
+
+	QMovie* movie = new QMovie(":/Resources/loading.gif");
+	lbl->setMovie(movie);
+	lbl->show();
+	movie->start();
+
+	main_layout->addWidget(lbl);
+
+	setGraphicsEffect(new QGraphicsBlurEffect);
 }
 
 void ToolBar::StockAnimation()
 {
+	connect(animation, &QPropertyAnimation::finished, this, &ToolBar::RestartStockAnimation);
+
 	// animation->setLoopCount(-1);
 	animation->setDuration(10000);
-    animation->setStartValue(QPoint(stockLayoutWidget->x(), stockLayoutWidget->y()));
-    animation->setEndValue(QPoint(stockLayoutWidget->x() - 300, stockLayoutWidget->y()));
+    animation->setStartValue(startPoint);
+    animation->setEndValue(endPoint.first);
 
-    animation->start();
+	qDebug() << startPoint << ' ' << endPoint.first;
 
-	connect(animation, &QPropertyAnimation::finished, this, &ToolBar::RestartStockAnimation);
-}
-
-void ToolBar::FakeCircle()
-{
-	stockLayout->addWidget(GetTicker("AAPL"));
-
-	QLayoutItem* child = stockLayout->itemAt(0);
-	stockLayout->removeItem(stockLayout->itemAt(0));
-
-	delete child->widget();
+    animation->start(QAbstractAnimation::DeleteWhenStopped);
 }
 
 void ToolBar::RestartStockAnimation()
 {
-	FakeCircle();
+	animation = new QPropertyAnimation(scrollBar, "sliderPosition");
+
+	if (endPoint.second == false)
+	{
+		startPoint = endPoint.first;
+		endPoint.first = scrollBar->minimum();
+		endPoint.second = true;
+	}
+	else
+	{
+		startPoint = endPoint.first;
+		endPoint.first = scrollBar->maximum(); 
+		endPoint.second = false;
+	}
+
 	StockAnimation();
 }
 
