@@ -116,7 +116,7 @@ void Session::OnWrite(beast::error_code ec,
 					));
 }
 
-auto ReadPrice = []()
+auto ReadPrice = [](std::string ticker)
 {
 	std::stringstream buffer;
 
@@ -130,7 +130,7 @@ auto ReadPrice = []()
 	std::string price = pt.get<std::string>("chart.result..meta.regularMarketPrice");
 
 	std::ofstream out("prices", std::ifstream::app);
-	out << price + '\n';
+	out << ticker + ' ' + price + '\n';
 	out.close();
 };
 
@@ -146,7 +146,7 @@ void Session::WriteData()
 		out << res_.body();
 		out.close();
 
-		ReadPrice();
+		ReadPrice(api_call->GetTicker());
 	}
 	else
 	{

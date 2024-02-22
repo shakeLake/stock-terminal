@@ -82,7 +82,7 @@ void ToolBar::AddTickers()
 	stockLayout->setSpacing(30);
 
 	stockLayout->addWidget(GetTicker("AAPL"));
-	stockLayout->addWidget(GetTicker("NVIDIA"));
+	stockLayout->addWidget(GetTicker("NVDA"));
 	stockLayout->addWidget(GetTicker("AMZN"));
 	stockLayout->addWidget(GetTicker("TSLA"));
 	stockLayout->addWidget(GetTicker("GOOG"));
@@ -99,6 +99,8 @@ void ToolBar::AddTickers()
 QWidget* ToolBar::GetTicker(std::string ticker)
 {
 	QWidget* tick = new QWidget;
+
+	QWidget* nameLayoutWidget = new QWidget;
 	QHBoxLayout* layout = new QHBoxLayout(tick);
 
 	// icon
@@ -132,42 +134,50 @@ QWidget* ToolBar::GetTicker(std::string ticker)
 	return tick;
 }
 
-void ToolBar::GetPrices()
+void ToolBar::ReadPrices()
 {
-	// GET request("AAPL", "STOCK_PRICE");
-	// GET request("NVIDIA", "STOCK_PRICE");
-	// GET request("AMZN", "STOCK_PRICE");
-	// GET request("TSLA", "STOCK_PRICE");
-	// GET request("GOOG", "STOCK_PRICE");
-	// GET request("MSFT", "STOCK_PRICE");
-	// GET request("META", "STOCK_PRICE");
-	// GET request("AMD", "STOCK_PRICE");
-	// GET request("NFLX", "STOCK_PRICE");
-	// GET request("INTC", "STOCK_PRICE");
-	// GET request("COIN", "STOCK_PRICE");
-	// GET request("ARM", "STOCK_PRICE");
-	// GET request("KO", "STOCK_PRICE");
-
 	QFile file("prices");
 
 	if(file.open(QFile::ReadOnly | QFile::Text))
 	{
 		while(!file.atEnd())
+		{
 			prices << file.readLine();
+			prices.back().removeLast();
+		}
 
 		if (prices.size() == 13)
 			UpdatePrice();
-		else
-			qDebug() << "Not enough error\n";
 	}
 	else
 		qDebug() << file.errorString() << file.error();
 }
 
+void ToolBar::GetPrices()
+{
+	qDebug() << "Request";
+
+	// GET request_1("AAPL", "STOCK_PRICE");
+	// GET request_2("NVDA", "STOCK_PRICE");
+	// GET request_3("AMZN", "STOCK_PRICE");
+	// GET request_4("TSLA", "STOCK_PRICE");
+	// GET request_5("GOOG", "STOCK_PRICE");
+	// GET request_6("MSFT", "STOCK_PRICE");
+	// GET request_7("META", "STOCK_PRICE");
+	// GET request_8("AMD", "STOCK_PRICE");
+	// GET request_9("NFLX", "STOCK_PRICE");
+	// GET request_10("INTC", "STOCK_PRICE");
+	// GET request_11("COIN", "STOCK_PRICE");
+	// GET request_12("ARM", "STOCK_PRICE");
+	// GET request_13("KO", "STOCK_PRICE");
+
+	ReadPrices();
+}
+
 void ToolBar::UpdatePrice()
 {
 	stuff["AAPL"]   = new QLabel(prices[0]);
-	stuff["NVIDIA"] = new QLabel(prices[1]); 
+	stuff["NVDA"] = new QLabel(prices[1]); 
 	stuff["AMZN"]   = new QLabel(prices[2]); 
 	stuff["TSLA"]   = new QLabel(prices[3]); 
 	stuff["GOOG"]   = new QLabel(prices[4]); 

@@ -14,10 +14,11 @@
 #include <QScrollArea>
 #include <QScrollBar>
 #include <QTimer>
-#include <QGraphicsBlurEffect>
-#include <QMovie>
 
+#include "../../api/include/client.hpp"
 #include "stockform.hpp"
+
+using GET = Client;
 
 class ToolBar : public QToolBar
 {
@@ -52,6 +53,8 @@ private:
 
 	void AddTickers();
 	QWidget* GetTicker(std::string /* ticker */);
+
+	void ReadPrices();
 	void UpdatePrice();
 	void GetPrices();
 
