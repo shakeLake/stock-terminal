@@ -24,11 +24,13 @@ ToolBar::ToolBar()
 	main_layout->addWidget(scrollArea);
 
 	scrollBar = scrollArea->horizontalScrollBar();
-
 	animation = new QPropertyAnimation(scrollBar, "sliderPosition");
 
 	Loading();
+}
 
+void ToolBar::StartAnimation()
+{
 	endPoint = {scrollBar->maximum(), false};
 	startPoint = scrollBar->minimum();
 	StockAnimation();
@@ -36,17 +38,7 @@ ToolBar::ToolBar()
 
 void ToolBar::Loading()
 {
-	QLabel* lbl = new QLabel();
-	lbl->setFixedSize(100, 100);
-
-	QMovie* movie = new QMovie(":/Resources/loading.gif");
-	lbl->setMovie(movie);
-	lbl->show();
-	movie->start();
-
-	main_layout->addWidget(lbl);
-
-	setGraphicsEffect(new QGraphicsBlurEffect);
+	QTimer::singleShot(1000, this, &ToolBar::StartAnimation);
 }
 
 void ToolBar::StockAnimation()
@@ -58,7 +50,7 @@ void ToolBar::StockAnimation()
     animation->setStartValue(startPoint);
     animation->setEndValue(endPoint.first);
 
-	qDebug() << startPoint << ' ' << endPoint.first;
+	// qDebug() << startPoint << ' ' << endPoint.first;
 
     animation->start(QAbstractAnimation::DeleteWhenStopped);
 }

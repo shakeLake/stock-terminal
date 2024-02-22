@@ -46,6 +46,7 @@ private:
 	QScrollBar* scrollBar;
 
 private:
+	void StartAnimation();
 	void StockAnimation();
 	void Loading();
 
