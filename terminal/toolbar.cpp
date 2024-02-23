@@ -9,7 +9,7 @@ ToolBar::ToolBar()
 
 	main_layout = new QHBoxLayout(main_widget);
 
-	GetPrices();
+	ReadPrices();
 
 	AddTickers();
 
@@ -134,6 +134,28 @@ QWidget* ToolBar::GetTicker(std::string ticker)
 	return tick;
 }
 
+auto TakeTickerAndPrice = [](QString& line) -> std::pair<std::string, QString>
+{
+	QString ticker;
+	QString price;
+
+	int i;
+	for (i = 0; i < line.size(); ++i)
+	{
+		if (line[i] == ' ')
+			break;
+
+		ticker += line[i];
+	}
+
+	for (i += 1; i < line.size(); ++i)
+		price += line[i];
+
+	// qDebug() << ticker << price;
+
+	return std::make_pair(ticker.toStdString(), price);
+};
+
 void ToolBar::ReadPrices()
 {
 	QFile file("prices");
@@ -142,12 +164,21 @@ void ToolBar::ReadPrices()
 	{
 		while(!file.atEnd())
 		{
-			prices << file.readLine();
-			prices.back().removeLast();
+			QString buf = file.readLine();
+			buf.removeLast();
+
+			prices << TakeTickerAndPrice(buf);
 		}
 
 		if (prices.size() == 13)
 			UpdatePrice();
+		else
+		{
+			if (MoreThanOneFlag == true)
+				return;
+
+			GetPrices();
+		}
 	}
 	else
 		qDebug() << file.errorString() << file.error();
@@ -155,6 +186,8 @@ void ToolBar::ReadPrices()
 
 void ToolBar::GetPrices()
 {
+	MoreThanOneFlag = true;
+
 	qDebug() << "Request";
 
 	// GET request_1("AAPL", "STOCK_PRICE");
@@ -176,19 +209,8 @@ void ToolBar::GetPrices()
 
 void ToolBar::UpdatePrice()
 {
-	stuff["AAPL"]   = new QLabel(prices[0]);
-	stuff["NVDA"] = new QLabel(prices[1]); 
-	stuff["AMZN"]   = new QLabel(prices[2]); 
-	stuff["TSLA"]   = new QLabel(prices[3]); 
-	stuff["GOOG"]   = new QLabel(prices[4]); 
-	stuff["MSFT"]   = new QLabel(prices[5]);
-	stuff["META"]   = new QLabel(prices[6]);
-	stuff["AMD"]    = new QLabel(prices[7]); 
-	stuff["NFLX"]   = new QLabel(prices[8]); 
-	stuff["INTC"]   = new QLabel(prices[9]);
-	stuff["COIN"]   = new QLabel(prices[10]);
-	stuff["ARM"]    = new QLabel(prices[11]);
-	stuff["KO"]     = new QLabel(prices[12]);
+	for (auto [key, value] : prices)
+		stuff[key] = new QLabel(value);
 }
 
 QToolBar* ToolBar::operator()()

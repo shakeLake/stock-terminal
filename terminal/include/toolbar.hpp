@@ -36,7 +36,7 @@ private:
 
 	// tickers
 	std::unordered_map<std::string, QLabel*> stuff;
-	QVector<QString> prices;
+	QVector<std::pair<std::string, QString>> prices;
 
 	// animation
 	QPropertyAnimation* animation;
@@ -45,6 +45,9 @@ private:
 	std::pair<int, bool> endPoint;
 
 	QScrollBar* scrollBar;
+
+	// read prices
+	bool MoreThanOneFlag = false;
 
 private:
 	void StartAnimation();
