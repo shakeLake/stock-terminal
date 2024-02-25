@@ -48,6 +48,7 @@ target_link_libraries(app-lib PUBLIC Qt6::Core)
 target_link_libraries(app-lib PUBLIC Qt6::Widgets)
 target_link_libraries(app-lib PUBLIC Qt6::Gui)
 target_link_libraries(app-lib PUBLIC Qt6::Charts)
+
 target_link_libraries(app-lib PUBLIC apicalllib)
 target_link_libraries(app-lib PUBLIC json-parser-lib)
 

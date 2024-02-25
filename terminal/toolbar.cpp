@@ -9,9 +9,9 @@ ToolBar::ToolBar()
 
 	main_layout = new QHBoxLayout(main_widget);
 
-	ReadPrices();
-
 	AddTickers();
+
+	ReadPrices();
 
 	scrollArea = new QScrollArea;
 
@@ -45,7 +45,6 @@ void ToolBar::StockAnimation()
 {
 	connect(animation, &QPropertyAnimation::finished, this, &ToolBar::RestartStockAnimation);
 
-	// animation->setLoopCount(-1);
 	animation->setDuration(10000);
     animation->setStartValue(startPoint);
     animation->setEndValue(endPoint.first);
@@ -81,19 +80,19 @@ void ToolBar::AddTickers()
 	stockLayout = new QHBoxLayout(stockLayoutWidget);
 	stockLayout->setSpacing(30);
 
-	stockLayout->addWidget(GetTicker("AAPL"));
-	stockLayout->addWidget(GetTicker("NVDA"));
-	stockLayout->addWidget(GetTicker("AMZN"));
-	stockLayout->addWidget(GetTicker("TSLA"));
-	stockLayout->addWidget(GetTicker("GOOG"));
-	stockLayout->addWidget(GetTicker("MSFT"));
-	stockLayout->addWidget(GetTicker("META"));
-	stockLayout->addWidget(GetTicker("AMD"));
-	stockLayout->addWidget(GetTicker("NFLX"));
-	stockLayout->addWidget(GetTicker("INTC"));
-	stockLayout->addWidget(GetTicker("COIN"));
-	stockLayout->addWidget(GetTicker("ARM"));
-	stockLayout->addWidget(GetTicker("KO"));
+	// stockLayout->addWidget(GetTicker("AAPL"));
+	// stockLayout->addWidget(GetTicker("NVDA"));
+	// stockLayout->addWidget(GetTicker("AMZN"));
+	// stockLayout->addWidget(GetTicker("TSLA"));
+	// stockLayout->addWidget(GetTicker("GOOG"));
+	// stockLayout->addWidget(GetTicker("MSFT"));
+	// stockLayout->addWidget(GetTicker("META"));
+	// stockLayout->addWidget(GetTicker("AMD"));
+	// stockLayout->addWidget(GetTicker("NFLX"));
+	// stockLayout->addWidget(GetTicker("INTC"));
+	// stockLayout->addWidget(GetTicker("COIN"));
+	// stockLayout->addWidget(GetTicker("ARM"));
+	// stockLayout->addWidget(GetTicker("KO"));
 }
 
 QWidget* ToolBar::GetTicker(std::string ticker)
@@ -134,7 +133,7 @@ QWidget* ToolBar::GetTicker(std::string ticker)
 	return tick;
 }
 
-auto TakeTickerAndPrice = [](QString& line) -> std::pair<std::string, QString>
+std::pair<std::string, QString> ToolBar::TakeTickerAndPrice(QString& line)
 {
 	QString ticker;
 	QString price;
@@ -154,7 +153,7 @@ auto TakeTickerAndPrice = [](QString& line) -> std::pair<std::string, QString>
 	// qDebug() << ticker << price;
 
 	return std::make_pair(ticker.toStdString(), price);
-};
+}
 
 void ToolBar::ReadPrices()
 {
@@ -170,22 +169,24 @@ void ToolBar::ReadPrices()
 			prices << TakeTickerAndPrice(buf);
 		}
 
+		qDebug() << prices.size();
+
 		if (prices.size() == 13)
 			UpdatePrice();
 		else
-		{
-			if (MoreThanOneFlag == true)
-				return;
-
 			GetPrices();
-		}
 	}
 	else
 		qDebug() << file.errorString() << file.error();
+
+	file.close();
 }
 
 void ToolBar::GetPrices()
 {
+	if (MoreThanOneFlag == true)
+		return;
+
 	MoreThanOneFlag = true;
 
 	qDebug() << "Request";
@@ -204,13 +205,34 @@ void ToolBar::GetPrices()
 	// GET request_12("ARM", "STOCK_PRICE");
 	// GET request_13("KO", "STOCK_PRICE");
 
+	// std::ofstream fl("prices");
+
+	// fl << "AAPL 1\n";
+	// fl << "NVDA 2\n";
+	// fl << "AMZN 3\n";
+	// fl << "TSLA 3\n";
+	// fl << "GOOG 4\n";
+	// fl << "MSFT 5\n";
+	// fl << "META 6\n";
+	// fl << "AMD 7\n";
+	// fl << "NFLX 8\n";
+	// fl << "INTC 9\n";
+	// fl << "COIN 10\n";
+	// fl << "ARM 11\n";
+	// fl << "KO 12\n";
+
+	// fl.close();
+
 	ReadPrices();
 }
 
 void ToolBar::UpdatePrice()
 {
 	for (auto [key, value] : prices)
+	{
 		stuff[key] = new QLabel(value);
+		stockLayout->addWidget(GetTicker(key));
+	}
 }
 
 QToolBar* ToolBar::operator()()

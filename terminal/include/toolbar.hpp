@@ -18,6 +18,8 @@
 #include "../../api/include/client.hpp"
 #include "stockform.hpp"
 
+#include <fstream>
+
 using GET = Client;
 
 class ToolBar : public QToolBar
@@ -54,6 +56,7 @@ private:
 	void StockAnimation();
 	void Loading();
 
+	std::pair<std::string, QString> TakeTickerAndPrice(QString&);
 	void AddTickers();
 	QWidget* GetTicker(std::string /* ticker */);
 
