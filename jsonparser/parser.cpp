@@ -51,7 +51,7 @@ std::vector<TimeSeries> JsonParser::ReadTimeSeries(std::string path)
 	std::vector<TimeSeries> ts;
 
 	std::array<double, 5> arr;
-	for (auto& item : pt.get_child("Time Series (Daily)"))
+	for (auto& item : pt.get_child("Monthly Time Series"))
 	{
 		TimeSeries buf;
 		buf.timestamp = GetTimeStamp(item.first);

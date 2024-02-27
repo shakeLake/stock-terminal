@@ -21,11 +21,12 @@ Review::Review()
 	layout->addWidget(infoData);
 }
 
-void Review::ReviewStart(std::string ticker)
+// current day ohlc
+std::vector<double> Review::ReviewStart(std::string ticker)
 {
 	infoData->setVisible(false);
 
-	rev_ticker = "TIME_SERIES_DAILY_";
+	rev_ticker = "TIME_SERIES_";
 	rev_ticker += ticker + ".json";
 
 	categories = new QStringList;
@@ -40,6 +41,8 @@ void Review::ReviewStart(std::string ticker)
 
 	chartView = new MyChartView(chart, series, &ohlc);
 	layout->addWidget(chartView);
+
+	return {ohlc[0].open, ohlc[0].high, ohlc[0].low, ohlc[0].close, ohlc[0].volume};
 }
 
 void Review::ReviewReset()

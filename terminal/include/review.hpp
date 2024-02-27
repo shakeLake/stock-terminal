@@ -54,7 +54,7 @@ public:
 	Review();
 	~Review() = default;
 
-	void ReviewStart(std::string /*ticker*/);
+	std::vector<double> ReviewStart(std::string /*ticker*/);
 	void ReviewReset();
 
 	QDockWidget* operator()();

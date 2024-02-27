@@ -20,7 +20,7 @@ public:
 	// 								   std::string /* second */);
 
 	// Core Stock API
-	std::string TIME_SERIES_DAILY(std::string /*symbol*/);
+	std::string TIME_SERIES(std::string /*symbol*/);
 
 	// Alpha Intelligence
 	std::string NEWS_SENTIMENT(std::string /*ticker*/);

@@ -17,9 +17,9 @@ std::string APICall::GetTargetName()
 	return command;
 }
 
-std::string APICall::TIME_SERIES_DAILY(std::string symbol)
+std::string APICall::TIME_SERIES(std::string symbol)
 {
-	std::string target =	"/query?function=TIME_SERIES_DAILY&symbol=" 
+	std::string target =	"/query?function=TIME_SERIES_MONTHLY&symbol=" 
 							+ symbol 
 							+ "&outputsize=full"
 							+ "&apikey="

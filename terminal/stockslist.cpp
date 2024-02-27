@@ -175,12 +175,25 @@ void StockList::TakeFromLineEdit()
 		tableCellToTicker[cellPointer] = line;
 		cellPointer += 1;
 
-		localAccess.MarkTickerAsLocalAccessible(line);
-
 		GET requestNEWS(line, "NEWS_SENTIMENT");
-		GET reqOHLC(line, "TIME_SERIES_DAILY");
+		GET reqOHLC(line, "TIME_SERIES");
+
+		localAccess.MarkTickerAsLocalAccessible(line);
 	}
 }
+
+auto GenerateOHLCVLabel = [](double value) -> QLabel*
+{
+	QLabel* label = new QLabel(QString::number(value));
+	label->setAlignment(Qt::AlignCenter);
+	label->setStyleSheet(
+		"font-weight: bold;"
+		"font-size: 15px;"
+		"color: white;"
+	);
+
+	return label;
+};
 
 void StockList::ActivateCheckWidget(int row, int col)
 {
@@ -200,7 +213,13 @@ void StockList::ActivateCheckWidget(int row, int col)
 
 		prev_widget = bufp;
 
-		reviewMenu->ReviewStart(tableCellToTicker[row]);
+		std::vector<double> ohlcv = reviewMenu->ReviewStart(tableCellToTicker[row]);
+		table->setCellWidget(row, 1, GenerateOHLCVLabel(ohlcv[0]));
+		table->setCellWidget(row, 2, GenerateOHLCVLabel(ohlcv[1]));
+		table->setCellWidget(row, 3, GenerateOHLCVLabel(ohlcv[2]));
+		table->setCellWidget(row, 4, GenerateOHLCVLabel(ohlcv[3]));
+		table->setCellWidget(row, 5, GenerateOHLCVLabel(ohlcv[4]));
+		
 		newsFeed->NewsFeedStart(tableCellToTicker[row]);
 	}
 }

@@ -14,8 +14,8 @@ Session::Session(net::any_io_executor ex,
 
 	if (api_call->GetTargetName() == "NEWS_SENTIMENT")
 		req_.target(api_call->NEWS_SENTIMENT(api_call->GetTicker()));
-	else if (api_call->GetTargetName() == "TIME_SERIES_DAILY")
-		req_.target(api_call->TIME_SERIES_DAILY(api_call->GetTicker()));
+	else if (api_call->GetTargetName() == "TIME_SERIES")
+		req_.target(api_call->TIME_SERIES(api_call->GetTicker()));
 	else if (api_call->GetTargetName() == "STOCK_PRICE")
 	{
 		req_.target(api_call->STOCK_PRICE(api_call->GetTicker()));
