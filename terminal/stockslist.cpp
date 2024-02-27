@@ -177,8 +177,8 @@ void StockList::TakeFromLineEdit()
 
 		localAccess.MarkTickerAsLocalAccessible(line);
 
-		// GET requestNEWS(line, "NEWS_SENTIMENT");
-		// GET reqOHLC(line, "TIME_SERIES_DAILY");
+		GET requestNEWS(line, "NEWS_SENTIMENT");
+		GET reqOHLC(line, "TIME_SERIES_DAILY");
 	}
 }
 

@@ -79,20 +79,6 @@ void ToolBar::AddTickers()
 	stockLayoutWidget = new QWidget;
 	stockLayout = new QHBoxLayout(stockLayoutWidget);
 	stockLayout->setSpacing(30);
-
-	// stockLayout->addWidget(GetTicker("AAPL"));
-	// stockLayout->addWidget(GetTicker("NVDA"));
-	// stockLayout->addWidget(GetTicker("AMZN"));
-	// stockLayout->addWidget(GetTicker("TSLA"));
-	// stockLayout->addWidget(GetTicker("GOOG"));
-	// stockLayout->addWidget(GetTicker("MSFT"));
-	// stockLayout->addWidget(GetTicker("META"));
-	// stockLayout->addWidget(GetTicker("AMD"));
-	// stockLayout->addWidget(GetTicker("NFLX"));
-	// stockLayout->addWidget(GetTicker("INTC"));
-	// stockLayout->addWidget(GetTicker("COIN"));
-	// stockLayout->addWidget(GetTicker("ARM"));
-	// stockLayout->addWidget(GetTicker("KO"));
 }
 
 QWidget* ToolBar::GetTicker(std::string ticker)
@@ -169,7 +155,7 @@ void ToolBar::ReadPrices()
 			prices << TakeTickerAndPrice(buf);
 		}
 
-		qDebug() << prices.size();
+		// qDebug() << prices.size();
 
 		if (prices.size() == 13)
 			UpdatePrice();
